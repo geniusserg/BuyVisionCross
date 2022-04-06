@@ -53,5 +53,4 @@ app.*.map.json
 /ios/Flutter/Release.xcconfig
 /ios/Runner.xcodeproj/project.pbxproj
 /ios/Runner.xcodeproj/project.pbxproj
-pubspec.lock
-/ios/Podfile.lock
+*.lock
