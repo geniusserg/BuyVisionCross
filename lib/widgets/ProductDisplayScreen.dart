@@ -25,11 +25,11 @@ class ProductDisplayScreen extends StatelessWidget {
           Container(
               padding: const EdgeInsets.only(bottom: 8),
               child: Text(text,
-                  style: const TextStyle(fontWeight: FontWeight.bold))),
-          Text(text, style: TextStyle(color: Colors.grey[500]))
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
+          Text(text, style: TextStyle(fontSize: 16, color: Colors.grey[500]))
         ])),
         Icon(Icons.star, color: Colors.red[500]),
-        const Text('42'),
+        Text('42', style: TextStyle(fontSize: 16, color: Colors.grey[500])),
       ]));
 
   Widget _buildButton(
@@ -61,9 +61,7 @@ class ProductDisplayScreen extends StatelessWidget {
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Image.file(
-          File(image),
-        ),
+        Image.asset("./images/package_image.jpeg"),
         _buildTitle(text: "Ряженка 100л"),
         Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

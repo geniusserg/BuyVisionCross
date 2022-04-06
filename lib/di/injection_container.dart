@@ -9,7 +9,7 @@ import '../services/get_camera.dart';
 final getIt = GetIt.instance;
 
 Future<void> init() async {
-    CameraDescription camera = await initCamera();
-    getIt.registerSingleton<CameraDescription>(camera);
+    //CameraDescription camera = await initCamera();
+    //getIt.registerSingleton<CameraDescription>(camera);
     getIt.registerLazySingleton<FirebaseRecognitionService>(() => FirebaseRecognitionService());
 }
