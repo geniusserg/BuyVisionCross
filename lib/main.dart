@@ -12,7 +12,11 @@ Future<void> main() async {
   runApp(
     MaterialApp(
       theme: ThemeData.dark(),
-      home: ProductDisplayScreen(model: ItemModel(id: 0, text:"hello", date:"2 march", photo:null)),
+      home: ProductDisplayScreen(
+          model: ItemModel(
+              headerName: "Сосиски Папа Может вареные ~1 кг",
+              largePhoto:
+                  "https://sbermarket.ru/spree/products/2223037/preview/15563981.jpg?1624471055")),
     ),
   );
 }

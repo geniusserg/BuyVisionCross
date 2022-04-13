@@ -1,14 +1,16 @@
 class ItemModel {
-  var id;
-  var text;
-  var photo;
-  var date;
-  var barcode;
+  String headerName;
+  String? fullName;
+  double? weight;
+  String? weightType;
+  String? manufacturer;
+  String? country;
+  String? description;
+  String? components;
+  String? price;
+  Map<String, String>? commonInformation;
+  String largePhoto;
+  String? minPhoto;
 
-  ItemModel(
-      {required this.id,
-      required this.text,
-      required this.date,
-      required this.photo,
-      this.barcode});
+  ItemModel({required this.headerName, required this.largePhoto});
 }

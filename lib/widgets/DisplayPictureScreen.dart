@@ -44,7 +44,7 @@ class DisplayPictureScreen extends StatelessWidget {
   }
 
   ItemModel _createItem({required String data, required imagePath}) {
-    return ItemModel(text: data, id: 1, date: DateTime.now(), photo: imagePath);
+    return ItemModel(headerName: data, largePhoto: imagePath);
   }
 
   Future<bool> _saveItemToDatabase({required ItemModel model}) {
