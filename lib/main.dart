@@ -5,18 +5,22 @@ import 'package:flutter/material.dart';
 import './widgets/TakePictureScreen.dart';
 import './models/ItemModel.dart';
 import './widgets/ProductDisplayScreen.dart';
+import './widgets/Application.dart';
 import './di/injection_container.dart' as di;
 
 Future<void> main() async {
   await di.init();
   runApp(
     MaterialApp(
-      theme: ThemeData.dark(),
-      home: ProductDisplayScreen(
-          model: ItemModel(
-              headerName: "Сосиски Папа Может вареные ~1 кг",
-              largePhoto:
-                  "https://sbermarket.ru/spree/products/2223037/preview/15563981.jpg?1624471055")),
-    ),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: Colors.blue,
+        fontFamily: "Roboto",
+        scaffoldBackgroundColor: Colors.white,
+        textTheme: const TextTheme(
+          bodyText2: TextStyle(color: Colors.black54)
+        )
+      ),
+      home: const Application()),
   );
 }
