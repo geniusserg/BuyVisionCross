@@ -14,4 +14,9 @@ class ItemModel {
   String toString() {
     return "{ name: '$name', parameters: ['$manufacturer', '$weight$weightType', '$description']}";
   }
+
+  static ItemModel fromJson({required Map<String, dynamic> json}) {
+    return ItemModel(name: json['name'])
+    ..description = json['dynamic'] ?? "";
+  }
 }

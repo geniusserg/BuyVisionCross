@@ -11,11 +11,23 @@ import 'package:qr_mobile_vision/qr_camera.dart';
 
 Future<void> main() async {
   await di.init();
-  String recognizedCodeApple = "4787789243";
-
+  String recognizedCodeApple = "4607092074702";
 
   // DEBUG!
-  if (Platform.isIOS) {
+
+  runApp(MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+          primaryColor: Colors.blue,
+          fontFamily: "Roboto",
+          scaffoldBackgroundColor: Colors.white,
+          textTheme:
+          const TextTheme(bodyText2: TextStyle(color: Colors.black54))),
+      home: Center(
+          child: Application(
+          ))));
+
+  if (3 == 4) {
     runApp(MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
@@ -23,36 +35,17 @@ Future<void> main() async {
             fontFamily: "Roboto",
             scaffoldBackgroundColor: Colors.white,
             textTheme:
-                const TextTheme(bodyText2: TextStyle(color: Colors.black54))),
-        home: Center(
-            child: ProductCardMain(
-          model: GS1Repository.getInfo(recognizedCodeApple),
-        ))));
-
-
-
-  } else {
-
-
-
-
-    runApp(MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-            primaryColor: Colors.blue,
-            fontFamily: "Roboto",
-            scaffoldBackgroundColor: Colors.white,
-            textTheme:
-                const TextTheme(bodyText2: TextStyle(color: Colors.black54))),
+            const TextTheme(bodyText2: TextStyle(color: Colors.black54))),
         home: Center(
           child: SizedBox(
             width: 300.0,
             height: 600.0,
             child: QrCamera(
-              onError: (context, error) => Text(
-                error.toString(),
-                style: TextStyle(color: Colors.red),
-              ),
+              onError: (context, error) =>
+                  Text(
+                    error.toString(),
+                    style: TextStyle(color: Colors.red),
+                  ),
               qrCodeCallback: (code) {
                 print(GS1Repository.getInfo(code));
               },

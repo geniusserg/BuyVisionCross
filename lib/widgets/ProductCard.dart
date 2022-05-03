@@ -30,6 +30,6 @@ class ProductCardMain extends StatelessWidget {
       }
     }
     return Scaffold(
-        body: SafeArea(child: Column(children: page)));
+        body:  Column(children: page));
   }
 }

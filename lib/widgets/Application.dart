@@ -7,7 +7,6 @@ import 'package:buy_vision_crossplatform/widgets/ProductCard.dart';
 import 'package:flutter/material.dart';
 import 'package:buy_vision_crossplatform/models/ItemModel.dart';
 
-
 class Application extends StatefulWidget {
   Application({Key? key}) : super(key: key);
   _ApplicationState createState() => _ApplicationState();
@@ -15,9 +14,9 @@ class Application extends StatefulWidget {
 
 class _ApplicationState extends State<Application> {
   final ItemModel? model = null;
-  var gtin = "000000000";
+  var gtin = "4607092074702";
   @override
-  void initState() {
+  void initState()  {
     super.initState();
   }
 
@@ -25,10 +24,16 @@ class _ApplicationState extends State<Application> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        body: ProductCardMain(model: GS1Repository.getInfo("00000000"))
+        body: SafeArea(child: FutureBuilder(
+            future: GS1Repository.getInfo(gtin),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                print("DONE! STATE: " + (snapshot.data as ItemModel?).toString());
+                return ProductCardMain(model: snapshot.data as ItemModel?);
+              }
+              return Center(child: CircularProgressIndicator());
+            })
+        )
     );
   }
-
-
-
 }
