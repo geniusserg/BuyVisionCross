@@ -1,16 +1,17 @@
 class ItemModel {
-  String headerName;
-  String? fullName;
-  double? weight;
-  String? weightType;
+  String name;
   String? manufacturer;
-  String? country;
+  String? weight;
+  String? weightType;
   String? description;
-  String? components;
-  String? price;
-  Map<String, String>? commonInformation;
-  String largePhoto;
-  String? minPhoto;
 
-  ItemModel({required this.headerName, required this.largePhoto});
+  String? largePhoto;
+  String? price;
+  Map<String, String>? options;
+
+  ItemModel({required this.name});
+  @override
+  String toString() {
+    return "{ name: '$name', parameters: ['$manufacturer', '$weight$weightType', '$description']}";
+  }
 }
