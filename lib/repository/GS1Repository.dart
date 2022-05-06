@@ -8,7 +8,6 @@ import 'package:html/parser.dart';
 class GS1Repository {
   static Future<ItemModel?> getInfo(gtin) async {
     var response = await http.Client().get(Uri.parse("https://srs.gs1ru.org/id/gtin/$gtin"));
-    print("GOT" + response.body);
     if (response.statusCode != 200){
       throw Exception("Not found");
     }

@@ -14,7 +14,6 @@ Future<void> main() async {
   String recognizedCodeApple = "4607092074702";
 
   // DEBUG!
-
   runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -26,9 +25,8 @@ Future<void> main() async {
       home: Center(
           child: Application(
           ))));
-
-  if (3 == 4) {
-    runApp(MaterialApp(
+  /*
+  runApp(MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             primaryColor: Colors.blue,
@@ -46,8 +44,8 @@ Future<void> main() async {
                     error.toString(),
                     style: TextStyle(color: Colors.red),
                   ),
-              qrCodeCallback: (code) {
-                print(GS1Repository.getInfo(code));
+              qrCodeCallback: (code) async {
+                print(await GS1Repository.getInfo(code));
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -61,5 +59,6 @@ Future<void> main() async {
             ),
           ),
         )));
-  }
+
+   */
 }
