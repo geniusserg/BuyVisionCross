@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:buy_vision_crossplatform/di/checkInternetConnection.dart';
-import 'package:buy_vision_crossplatform/services/get_camera.dart';
+import 'di/checkInternetConnection.dart';
+import 'di/checkCamera.dart';
 import 'package:buy_vision_crossplatform/widgets/Home.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +12,7 @@ CameraDescription? camera;
 
 Future<void> main() async {
   internetConnected = isAppConnectedToInternet();
-  firebaseInitialized = await initFirebase();
+  firebaseInitialized = await initCloud();
   camera = await initCamera();
 
   const String recognizedCode = "4607092074702";
