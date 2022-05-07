@@ -5,7 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 
 final getIt = GetIt.instance;
 
-Future<bool> init() async {
+Future<bool> initFirebase() async {
   try {
     Firebase.initializeApp();
     return true;
