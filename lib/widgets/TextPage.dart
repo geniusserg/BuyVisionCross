@@ -12,8 +12,8 @@ class TextPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-        child: FutureBuilder(
+    return Scaffold(
+        body: FutureBuilder(
             future: RecognitionService.recognizeText(imageFile: File(path)),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {

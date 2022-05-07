@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import '../resources/strings.dart';
 
 class CameraScreen extends StatefulWidget {
+  const CameraScreen({Key? key}) : super(key: key);
+
   @override
   _CameraScreenState createState() => _CameraScreenState();
 }
@@ -15,9 +17,9 @@ class _CameraScreenState extends State<CameraScreen> {
   late final CameraController _controller;
 
   // Initializes camera controller to preview on screen
-  void _initializeCamera(){
+  void _initializeCamera() {
     final CameraController cameraController = CameraController(
-      cameraDescription!,             // should be resolved in main! 
+      cameraDescription!, // should be resolved in main!
       ResolutionPreset.high,
     );
     _controller = cameraController;
@@ -93,12 +95,11 @@ class _CameraScreenState extends State<CameraScreen> {
                         // to the DetailScreen
                         await _takePicture().then((String? path) {
                           if (path != null) {
+                            
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => TextPage(
-                                  path: path 
-                                ),
+                                builder: (context) => TextPage(path: path),
                               ),
                             );
                           } else {
@@ -120,4 +121,3 @@ class _CameraScreenState extends State<CameraScreen> {
     );
   }
 }
-

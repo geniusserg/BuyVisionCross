@@ -1,3 +1,3 @@
-bool isAppConnectedToInternet() {
+bool hasInternet() {
   return true;
 }

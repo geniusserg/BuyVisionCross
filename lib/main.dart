@@ -11,6 +11,7 @@ import '../di/dependencies.dart' as di;
 
 Future<void> main() async {
   di.cameraDescription = await getCamera();
+  
   if (di.cameraDescription == null) {
     runApp(MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -19,6 +20,8 @@ Future<void> main() async {
             icon: Icon(Icons.camera_alt, color: Colors.black))));
     return;
   }
+  
+  
 
   runApp(const MaterialApp(debugShowCheckedModeBanner: false, home: SafeArea(child: Home())));
 }

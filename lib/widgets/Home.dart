@@ -29,11 +29,4 @@ class Home extends StatelessWidget {
       ],
     ));
   }
-
-  Widget buildCameraError(BuildContext context) {
-    return Column(children: [
-      Icon(Icons.flip_camera_ios, color: Colors.red),
-      Text(str_camera_error)
-    ]);
-  }
 }
