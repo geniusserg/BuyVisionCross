@@ -2,10 +2,10 @@ import 'package:buy_vision_crossplatform/models/ItemModel.dart';
 import 'package:flutter/material.dart';
 import '../styles/TextStyles.dart';
 
-class ProductCardMain extends StatelessWidget {
+class ProductCard extends StatelessWidget {
   final ItemModel? model;
  
-  const ProductCardMain({ Key? key, required this.model}) : super(key: key);
+  const ProductCard({ Key? key, required this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

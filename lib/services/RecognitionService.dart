@@ -9,10 +9,11 @@ class RecognitionService {
   static Future<String> recognizeText({required File imageFile}) async {
     if (imageFile == null) {
       throw Exception("No imageFile found");
-    } 
-    return 
-      "Масло олейна 5 грамм. Срок годности 5 суток. хранить в погребе."
-      "Manufactured in Moscow, street proletarskaya. May contain some protein pollutions. Take care for children and dogs.";
+    }
+    
+    return Future.delayed(Duration(milliseconds: 3000), () {
+      return "Масло олейна 5 грамм. Срок годности 5 суток. хранить в погребе."
+          "Manufactured in Moscow, street proletarskaya. May contain some protein pollutions. Take care for children and dogs.";
+    });
   }
-
 }

@@ -30,7 +30,7 @@ class _ApplicationState extends State<Application> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 log("builder[GS1]: DONE! STATE: " + (snapshot.data as ItemModel?).toString());
-                return ProductCardMain(model: snapshot.data as ItemModel?);
+                return ProductCard(model: snapshot.data as ItemModel?);
               }
               return Center(child: CircularProgressIndicator());
             })
