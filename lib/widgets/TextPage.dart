@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:buy_vision_crossplatform/resources/strings.dart';
 import 'package:buy_vision_crossplatform/services/RecognitionService.dart';
+import 'package:buy_vision_crossplatform/styles/TextStyles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +22,7 @@ class TextPage extends StatelessWidget {
                 log("builder[YC OCR]: DONE! STATE: " +
                     (text ?? "Text not found"));
                 return SingleChildScrollView(
-                  child: Text(text ?? str_not_found),
+                  child: Text(text ?? str_not_found, style: styleTextRecognized),
                 );
               }
               return Center(child: CircularProgressIndicator());

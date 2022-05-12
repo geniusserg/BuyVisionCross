@@ -3,12 +3,12 @@
 
 import 'dart:convert';
 import 'dart:io';
+import 'package:buy_vision_crossplatform/models/YandexCloudRequest.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../di/checkInternetConnection.dart';
 import 'package:http/http.dart' as http;
-
 
 class RecognitionService {
   static String authUrl = "https://iam.api.cloud.yandex.net/iam/v1/tokens";
@@ -30,8 +30,8 @@ class RecognitionService {
   }
 
   static Future<String> recognizeText({required File imageFile}) async {
-    if (imageFile == null) {
-      throw Exception("No imageFile found");
+    if (imageFile == null || !(await imageFile.exists())) {
+      throw Exception("No image file was found");
     }
 
     if (!hasInternet()) {
@@ -42,6 +42,10 @@ class RecognitionService {
     if (iamCode == null) {
       throw Exception("Can not authorize in yandex cloud service");
     }
+
+    var req = YandexCloudRequest();
+    req.setImageFile(imageFile);
+    
 
     // change on real when cloud is running
     return Future.delayed(Duration(milliseconds: 3000), () {
