@@ -24,53 +24,65 @@ class TextPage extends StatelessWidget {
     };
   }
 
+  Widget speechButton() {
+    return FloatingActionButton(
+      child: Icon(Icons.record_voice_over_outlined),
+      onPressed: () {
+      if (state == "stop") {
+        tts!.speak(text ?? str_loading);
+        state = "play";
+      } else {
+        tts!.pause();
+        state = "stop";
+      }
+    });
+  }
+
+  Widget backButton(BuildContext context) {
+    return FloatingActionButton(
+      child:Icon(Icons.turn_left),
+      onPressed: () {
+      tts!.stop();
+      Navigator.pop(context);
+    });
+  }
+
+  Widget loadingWidget() {
+    return Center(
+        child: Column(children: [
+      CircularProgressIndicator(),
+      Text(
+        str_loading,
+        style: styleTextRecognized,
+      )
+    ]));
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-            floatingActionButton: 
-              Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-              FloatingActionButton(onPressed: () {
-                if (state == "stop") {
-                  tts!.speak(text ?? str_loading);
-                  state = "play";
-                } else {
-                  tts!.pause();
-                  state = "stop";
-                }
-              }),
-              FloatingActionButton(onPressed: () {
-                tts!.stop();
-                Navigator.pop(context);
-              })
-            ]),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
+            floatingActionButton: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Semantics(child: backButton(context), label: str_speech),
+                  Semantics(child: speechButton(), label: str_back),
+                ]),
             body: FutureBuilder(
                 future: RecognitionService.recognizeText(
                     request: YandexCloudRequest()),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
-                    text = (snapshot.data as String?);
-                    if (text == null) {
-                      text = str_not_found;
-                    }
-                    tts!.speak(text ?? str_error);
+                    text = (snapshot.data as String?) ?? str_not_found;
+                    tts!.speak(text!);
                     state = "play";
                     return SingleChildScrollView(
                       child: Text(text!, style: styleTextRecognized),
                     );
                   }
-                  return Align(
-                      alignment: Alignment(0, 0),
-                      child: Column(children: [
-                        CircularProgressIndicator(),
-                        Text(
-                          str_loading,
-                          style: styleTextRecognized,
-                        )
-                      ]));
+                  return loadingWidget();
                 })));
   }
 }

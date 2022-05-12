@@ -9,3 +9,6 @@ const String str_connection_error =
     "Не удается установить подключение к интернету";
 const String str_take_photo = "сделать фото";
 const String str_loading = "загрузка";
+
+const String str_back = "сделать новый снимок";
+const String str_speech = "озвучить текст";

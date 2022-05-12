@@ -62,6 +62,23 @@ class _CameraScreenState extends State<CameraScreen> {
     return imagePath;
   }
 
+  Future<void> handleTakingPicture() async {
+    // If the returned path is not null navigate
+    // to the DetailScreen
+    await _takePicture().then((String? path) {
+        if (path != null) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => TextPage(path: path),
+            ),
+          );
+        } else {
+          log('cameraPreview -> takepicture : file not found $path');
+        }
+    });
+  }
+
   @override
   void initState() {
     _initializeCamera();
@@ -87,25 +104,9 @@ class _CameraScreenState extends State<CameraScreen> {
                   padding: const EdgeInsets.all(20.0),
                   child: Container(
                     alignment: Alignment.bottomCenter,
-                    child: ElevatedButton.icon(
-                      icon: Icon(Icons.camera),
-                      label: Text(str_take_photo),
-                      onPressed: () async {
-                        // If the returned path is not null navigate
-                        // to the DetailScreen
-                        await _takePicture().then((String? path) {
-                          if (path != null) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => TextPage(path: path),
-                              ),
-                            );
-                          } else {
-                            log('cameraPreview -> takepicture : file not found $path');
-                          }
-                        });
-                      },
+                    child: FloatingActionButton.large(
+                      child: Icon(Icons.photo_camera),
+                      onPressed: handleTakingPicture
                     ),
                   ),
                 )
