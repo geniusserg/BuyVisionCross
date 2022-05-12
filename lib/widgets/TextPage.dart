@@ -40,6 +40,7 @@ class TextPage extends StatelessWidget {
 
   Widget backButton(BuildContext context) {
     return FloatingActionButton(
+      heroTag: "sdf",
       child:Icon(Icons.turn_left),
       onPressed: () {
       tts!.stop();
@@ -71,7 +72,7 @@ class TextPage extends StatelessWidget {
                   Semantics(child: speechButton(), label: str_back),
                 ]),
             body: FutureBuilder(
-                future: RecognitionService.recognizeText(
+                future: RecognitionService.execute(
                     request: YandexCloudRequest()),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {

@@ -1,4 +1,5 @@
 import 'package:camera/camera.dart';
 
 CameraDescription? cameraDescription;
-bool? internetConnectionAvailable;
+String? OAuthToken;
+String? folderId;

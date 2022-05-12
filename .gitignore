@@ -54,3 +54,5 @@ app.*.map.json
 /ios/Runner.xcodeproj/project.pbxproj
 /ios/Runner.xcodeproj/project.pbxproj
 *.lock
+
+tokens.json

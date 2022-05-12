@@ -1,13 +1,15 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:buy_vision_crossplatform/di/dependencies.dart' as di;
+import 'package:flutter/services.dart';
+
 class YandexCloudRequest {
-  String? folderId;
+  String? folderId = di.folderId;
   String? content;
   Map<String, dynamic>? features;
 
-  YandexCloudRequest() {
-  }
+  YandexCloudRequest() {}
 
   @override
   String toString() {

@@ -19,7 +19,7 @@ class _CameraScreenState extends State<CameraScreen> {
   // Initializes camera controller to preview on screen
   void _initializeCamera() {
     final CameraController cameraController = CameraController(
-      cameraDescription!, // should be resolved in main!
+    cameraDescription!, // should be resolved in main!
       ResolutionPreset.high,
     );
     _controller = cameraController;

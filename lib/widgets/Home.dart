@@ -15,7 +15,7 @@ class Home extends StatelessWidget {
 
   Future<void> _testFunc() async {
     var req = YandexCloudRequest();
-    var t = await RecognitionService.recognizeText(request: req);
+    var t = await RecognitionService.execute(request: req);
 
     print(req.toString());
     print(t);
