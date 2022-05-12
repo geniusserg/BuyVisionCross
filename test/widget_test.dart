@@ -5,14 +5,18 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:buy_vision_crossplatform/models/YandexCloudRequest.dart';
 import 'package:buy_vision_crossplatform/repository/GS1Repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
+import 'package:image_downloader/image_downloader.dart';
 import 'package:buy_vision_crossplatform/main.dart';
 
 void main() {
   testWidgets('GS1 RUS API test', (WidgetTester tester) async {
-    GS1Repository.getInfo("4607092074702");
+    
   });
 }
