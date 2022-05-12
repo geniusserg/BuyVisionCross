@@ -2,7 +2,9 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:buy_vision_crossplatform/resources/strings.dart';
+import 'package:buy_vision_crossplatform/services/RecognitionService.dart';
 import 'package:buy_vision_crossplatform/widgets/Preview.dart';
+import 'package:buy_vision_crossplatform/widgets/TextPage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_downloader/image_downloader.dart';
 
@@ -11,14 +13,12 @@ import '../models/YandexCloudRequest.dart';
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
 
-  Future<void> _testFunc() async{
+  Future<void> _testFunc() async {
     var req = YandexCloudRequest();
-    var imageId = await ImageDownloader.downloadImage(
-        "https://sun7-6.userapi.com/s/v1/ig2/9g2Jw0LoYYh13U0X6EvBZ531TghYw7JDHv-XfEXPnX8l9lfzELbto55XJqXKZ_NVRZ7FluHMWWtn_ndtesnOwOIs.jpg?size=1024x649&quality=96&type=album");
-    var path = await ImageDownloader.findPath(imageId!);
+    var t = await RecognitionService.recognizeText(request: req);
 
-    req.setImageFile(File(path!));
-    log(req.toString());
+    print(req.toString());
+    print(t);
     return;
   }
 
@@ -46,7 +46,9 @@ class Home extends StatelessWidget {
         Expanded(
             child: ElevatedButton(
                 onPressed: () {
-                  _testFunc();
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return TextPage(path: "");
+                  }));
                 },
                 child: const Text("TEST FUNCTIONALITY")))
       ],

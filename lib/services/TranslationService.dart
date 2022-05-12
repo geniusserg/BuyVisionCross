@@ -1,9 +1,7 @@
-// Yandex Cloud -> Vision -> Text Recognition API
+// Yandex Cloud -> Language -> Translation API
 // Need OAuth token
 
 import 'dart:convert';
-import 'dart:developer';
-import 'dart:io';
 import 'package:buy_vision_crossplatform/models/YandexCloudRequest.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
@@ -11,7 +9,7 @@ import 'package:flutter/material.dart';
 import '../di/checkInternetConnection.dart';
 import 'package:http/http.dart' as http;
 
-class RecognitionService {
+class TranslationService {
   static String authUrl = "https://iam.api.cloud.yandex.net/iam/v1/tokens";
   static String authKey = "";
   static String authVar = "{\"yandexPassportOauthToken\" : \"$authKey\"}";
@@ -49,7 +47,6 @@ class RecognitionService {
       throw Exception("No internet connection");
     }
 
-/*
     var iamCode = await _auth();
     if (iamCode == null) {
       throw Exception("No access to API");
@@ -60,7 +57,6 @@ class RecognitionService {
     if (dictResult.containsKey("code")) {
       Exception("No access to API");
     }
-*/
 
     // change on real when cloud is running
     return Future.delayed(Duration(milliseconds: 3000), () {

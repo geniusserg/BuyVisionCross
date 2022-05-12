@@ -8,3 +8,4 @@ const String str_camera_error = "Не удается найти камеру н�
 const String str_connection_error =
     "Не удается установить подключение к интернету";
 const String str_take_photo = "сделать фото";
+const String str_loading = "загрузка";
