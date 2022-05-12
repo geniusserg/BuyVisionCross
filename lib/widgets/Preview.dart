@@ -95,7 +95,6 @@ class _CameraScreenState extends State<CameraScreen> {
                         // to the DetailScreen
                         await _takePicture().then((String? path) {
                           if (path != null) {
-                            
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -121,3 +120,4 @@ class _CameraScreenState extends State<CameraScreen> {
     );
   }
 }
+
