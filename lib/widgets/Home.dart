@@ -9,17 +9,24 @@ import 'package:flutter/material.dart';
 import 'package:image_downloader/image_downloader.dart';
 
 import '../models/YandexCloudRequest.dart';
+import '../models/YandexCloudVisionRequest.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
 
   Future<void> _testFunc() async {
-    var req = YandexCloudRequest();
-    var t = await RecognitionService.execute(request: req);
+    const barcodeImg =
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7q3L9clDMEXGs2ndmxJmsTpySB5NL_uksyA&usqp=CAU";
+    const imageKazak =
+        "https://images.online-otvet.ru/1abc37362c85afc16f3fc863b0f79b08.jpg:thumb";
+    const imageRus =
+        "https://survival-russian.ru/wp-content/uploads/2021/08/2-250x300.jpg";
 
-    print(req.toString());
-    print(t);
-    return;
+    var imagePath = await ImageDownloader.downloadImage(imageKazak);
+    print(imagePath);
+    print("l   " +
+        await RecognitionService.execute(
+            request: YandexCloudVisionRequest(path: imagePath!)));
   }
 
   @override
@@ -46,9 +53,10 @@ class Home extends StatelessWidget {
         Expanded(
             child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return TextPage(path: "");
-                  }));
+                  _testFunc();
+                  //Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  //  return TextPage(path: "");
+                  //}));
                 },
                 child: const Text("TEST FUNCTIONALITY")))
       ],

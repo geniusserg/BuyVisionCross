@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 import '../models/YandexCloudRequest.dart';
+import '../models/YandexCloudVisionRequest.dart';
 
 class TextPage extends StatelessWidget {
   String path;
@@ -73,7 +74,7 @@ class TextPage extends StatelessWidget {
                 ]),
             body: FutureBuilder(
                 future: RecognitionService.execute(
-                    request: YandexCloudRequest()),
+                    request: YandexCloudVisionRequest(path: '')),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     text = (snapshot.data as String?) ?? str_not_found;

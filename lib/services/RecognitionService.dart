@@ -12,25 +12,27 @@ import 'package:flutter/material.dart';
 import '../di/checkInternetConnection.dart';
 import 'package:http/http.dart' as http;
 
-class RecognitionService{
+class RecognitionService {
   static String reqUrl =
       "https://vision.api.cloud.yandex.net/vision/v1/batchAnalyze";
 
-  static Future<String> execute(
-      {required YandexCloudRequest request}) async {
+  static Future<String> execute({required YandexCloudRequest request}) async {
     if (!hasInternet()) {
       throw Exception("No internet connection");
     }
 
     var result = await YandexService.sendRequest(reqUrl, request.toString());
-    Map<String, dynamic> dictResult = json.decode(result);
-    if (dictResult.containsKey("code")) {
-      Exception("No access to API");
+    Map<String, dynamic>? dictResult;
+    try {
+      Map<String, dynamic> dictResult = json.decode(result);
+    } catch (FormatException) {
+      throw Exception("Wrong response from API");
+    }
+    if (dictResult != null && dictResult.containsKey("code")) {
+      throw Exception("No access to API");
     }
 
     // change on real when cloud is running
-    return Future.delayed(Duration(milliseconds: 3000), () {
-      return "Масло олейна 5 грамм. Срок годности 5 суток. хранить в погребе.";
-    });
+    return dictResult.toString();
   }
 }

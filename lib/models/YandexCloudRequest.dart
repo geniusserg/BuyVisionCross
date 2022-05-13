@@ -3,22 +3,23 @@ import 'dart:io';
 
 import 'package:buy_vision_crossplatform/di/dependencies.dart' as di;
 import 'package:flutter/services.dart';
+import '../tokens.dart';
 
-class YandexCloudRequest {
-  String? folderId = di.folderId;
-  String? content;
-  Map<String, dynamic>? features;
+abstract class YandexCloudRequest {
+  String? getContent();
 
-  YandexCloudRequest() {}
+  Map<String, dynamic>? getFeatures();
+
+  YandexCloudRequest();
 
   @override
   String toString() {
     return json.encode({
-      "folderId": folderId ?? "",
+      "folderId": folderId,
       "analyze_specs": [
         {
-          "content": (content ?? ""),
-          "features": [features]
+          "content": (getContent() ?? ""),
+          "features": [getFeatures()]
         }
       ]
     });

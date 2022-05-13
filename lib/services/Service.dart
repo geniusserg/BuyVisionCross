@@ -2,14 +2,15 @@ import 'dart:convert';
 
 import 'package:buy_vision_crossplatform/di/dependencies.dart' as di;
 import 'package:http/http.dart' as http;
+import '../tokens.dart';
 
 class YandexService {
   static String authUrl = "https://iam.api.cloud.yandex.net/iam/v1/tokens";
 
   static Future<String?> auth() async {
-    String authKey = di.OAuthToken!;
-    String authVar = "{\"yandexPassportOauthToken\" : \"" + authKey + "\"}";
-    var response = await http.Client().post(Uri.parse(authUrl), body: authVar);
+    String authVar = "{\"yandexPassportOauthToken\" : \"" + authToken + "\"}";
+    var response = await http.Client().post(Uri.parse(authUrl),
+        headers: {"Content-Type": "application/json"}, body: authVar);
     if (response.statusCode != 200) {
       return null;
     }
@@ -24,16 +25,20 @@ class YandexService {
 
   static Future<String> sendRequest(String reqUrl, String requestJson) async {
     String? token = await auth();
+    if (token == null) {
+      throw Exception("API Error. Not authenticated in Yandex Cloud");
+    }
     var response = await http.Client().post(Uri.parse(reqUrl),
         headers: {
           "Content-Type": "application/json",
           "Authorization": "Bearer $token"
         },
         body: requestJson);
+    print(response.body);
     return response.body;
   }
 
-  static void execute() { 
+  static void execute() {
     // here body
   }
 }

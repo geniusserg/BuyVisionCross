@@ -3,20 +3,28 @@ import 'dart:io';
 
 import 'YandexCloudRequest.dart';
 
-class YandexCloudVisionRequest extends YandexCloudRequest{
-  Map<String, dynamic>? features = {
-    "type": "TEXT_DETECTION",
-    "text_detection_config": {
-      "language_codes": ["*"]
-    }
-  };
-
-  String path;
-
-  YandexCloudVisionRequest({required this.path}): super(){
-    setImageFile(File(path));
+class YandexCloudVisionRequest implements YandexCloudRequest {
+  @override
+  Map<String, dynamic>? getFeatures() {
+    return {
+      "type": "TEXT_DETECTION",
+      "text_detection_config": {
+        "language_codes": ["*"]
+      }
+    };
   }
 
+  @override
+  String? getContent() {
+    return content;
+  }
+
+  String path;
+  String? content;
+
+  YandexCloudVisionRequest({required this.path}) {
+    setImageFile(File(path));
+  }
 
   Future<void> setImageFile(File? imageFile) async {
     if (imageFile == null) {
@@ -26,5 +34,6 @@ class YandexCloudVisionRequest extends YandexCloudRequest{
     List<int> imageBytes = await imageFile.readAsBytes();
     content = base64Encode(imageBytes);
   }
-  
+
+
 }
