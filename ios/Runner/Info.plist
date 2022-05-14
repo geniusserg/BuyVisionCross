@@ -44,6 +44,8 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-    <string>Explanation on why the camera access is needed.</string>
+    <string>Need camera for scanning text</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Need for taking voice commands</string>
 </dict>
 </plist>

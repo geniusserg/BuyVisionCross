@@ -2,7 +2,7 @@
 // Need OAuth token
 
 import 'dart:convert';
-import 'package:buy_vision_crossplatform/models/YandexCloudRequest.dart';
+import 'package:buy_vision_crossplatform/models/YandexCloudVisionRequest.dart';
 import 'package:buy_vision_crossplatform/services/Service.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
@@ -15,7 +15,7 @@ class TranslationService {
       "https://vision.api.cloud.yandex.net/vision/v1/batchAnalyze";
 
   static Future<String> execute(
-      {required YandexCloudRequest request}) async {
+      {required YandexCloudVisionRequest request}) async {
     if (!hasInternet()) {
       throw Exception("No internet connection");
     }

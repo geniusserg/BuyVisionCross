@@ -15,7 +15,7 @@ import 'models/YandexCloudVisionRequest.dart';
 import 'tokens.dart';
 
 Future<void> main() async {
-  /*
+  WidgetsFlutterBinding.ensureInitialized();
   di.cameraDescription = await getCamera();
   if (di.cameraDescription == null) {
     runApp(MaterialApp(
@@ -25,7 +25,6 @@ Future<void> main() async {
             icon: Icon(Icons.camera_alt, color: Colors.black))));
     return;
   }
-  */
 
   runApp(const MaterialApp(
       debugShowCheckedModeBanner: false, home: SafeArea(child: Home())));

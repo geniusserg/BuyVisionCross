@@ -20,7 +20,7 @@ class _CameraScreenState extends State<CameraScreen> {
   void _initializeCamera() {
     final CameraController cameraController = CameraController(
     cameraDescription!, // should be resolved in main!
-      ResolutionPreset.high,
+      ResolutionPreset.medium,
     );
     _controller = cameraController;
 
@@ -36,14 +36,14 @@ class _CameraScreenState extends State<CameraScreen> {
   // returns the image path
   Future<String?> _takePicture() async {
     if (!_controller.value.isInitialized) {
-      log("camerapreview -> takepicture : Controller is not initialized");
+      print("camerapreview -> takepicture : Controller is not initialized");
       return null;
     }
 
     String? imagePath;
 
     if (_controller.value.isTakingPicture) {
-      log("camerapreview -> takepicture : Processing is progress ...");
+      print("camerapreview -> takepicture : Processing is progress ...");
       return null;
     }
 
@@ -55,7 +55,7 @@ class _CameraScreenState extends State<CameraScreen> {
       // Retrieving the path
       imagePath = file.path;
     } on CameraException catch (e) {
-      log(" camerapreview -> takepicture : Camera Exception: $e");
+      print(" camerapreview -> takepicture : Camera Exception: $e");
       return null;
     }
 

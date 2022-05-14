@@ -3,8 +3,6 @@ import 'package:buy_vision_crossplatform/services/RecognitionService.dart';
 import 'package:buy_vision_crossplatform/styles/TextStyles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-
-import '../models/YandexCloudRequest.dart';
 import '../models/YandexCloudVisionRequest.dart';
 
 class TextPage extends StatelessWidget {
@@ -33,7 +31,7 @@ class TextPage extends StatelessWidget {
         tts!.speak(text ?? str_loading);
         state = "play";
       } else {
-        tts!.pause();
+        tts!.stop();
         state = "stop";
       }
     });
@@ -74,7 +72,7 @@ class TextPage extends StatelessWidget {
                 ]),
             body: FutureBuilder(
                 future: RecognitionService.execute(
-                    request: YandexCloudVisionRequest(path: '')),
+                    request: YandexCloudVisionRequest(path: path)),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     text = (snapshot.data as String?) ?? str_not_found;

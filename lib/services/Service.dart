@@ -34,7 +34,6 @@ class YandexService {
           "Authorization": "Bearer $token"
         },
         body: requestJson);
-    print(response.body);
     return response.body;
   }
 
