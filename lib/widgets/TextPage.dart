@@ -11,29 +11,26 @@ class TextPage extends StatelessWidget {
   String state = "stop";
   FlutterTts? tts;
   TextPage({Key? key, required this.path}) : super(key: key) {
-    tts = FlutterTts();
-    if (tts == null) {
-      throw Exception("Text to Speech module is not activated");
-    }
-    tts!.pauseHandler = () {
-      state = "stop";
-    };
-    tts!.completionHandler = () {
-      state = "stop";
-    };
   }
 
   Widget speechButton() {
     return FloatingActionButton(
       child: Icon(Icons.record_voice_over_outlined),
       onPressed: () {
-      if (state == "stop") {
-        tts!.speak(text ?? str_loading);
-        state = "play";
-      } else {
-        tts!.stop();
-        state = "stop";
-      }
+        tts ??= FlutterTts();
+        tts!.pauseHandler = () {
+          state = "stop";
+        };
+        tts!.completionHandler = () {
+          state = "stop";
+        };
+        if (state == "stop") {
+          tts!.speak(text ?? str_loading);
+          state = "play";
+        } else {
+          tts!.stop();
+          state = "stop";
+        }
     });
   }
 
@@ -60,6 +57,7 @@ class TextPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var talkbackActivated = MediaQuery.of(context).accessibleNavigation;
     return SafeArea(
         child: Scaffold(
             floatingActionButtonLocation:
@@ -68,7 +66,7 @@ class TextPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Semantics(child: backButton(context), label: str_speech),
-                  Semantics(child: speechButton(), label: str_back),
+                  talkbackActivated ? Semantics(child: speechButton(), label: str_back) : Semantics()
                 ]),
             body: FutureBuilder(
                 future: RecognitionService.execute(

@@ -3,28 +3,13 @@ import 'package:flutter/material.dart';
 import '../styles/TextStyles.dart';
 
 class ProductCard extends StatelessWidget {
-  final ItemModel? model;
+  final ItemModel model;
  
   const ProductCard({ Key? key, required this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> page = List.empty(growable: true);
-    if (model == null) {
-      page.add(const Text("Not found :("));
-    } else {
-      page.add(Text(model!.name, style: styleHeader));
-      page.add(Text(model!.manufacturer ?? "unknown manufacturer",
-          style: styleManufacturer));
-      page.add(Text("Weight: " +
-          (model!.weight ?? "unknown weight") +
-          " " +
-          (model!.weightType ?? "")));
-      if (model!.description != null) {
-        page.add(const Text("Description"));
-        page.add(Text(model!.description ?? ""));
-      }
-    }
-    return Scaffold(body: Column(children: page));
+    List<Widget> page = [Text(model.name!), Text(model.gsInfo!.values.join(" "))];
+    return Column(children: page);
   }
 }

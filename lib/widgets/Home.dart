@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:buy_vision_crossplatform/resources/strings.dart';
 import 'package:buy_vision_crossplatform/services/RecognitionService.dart';
+import 'package:buy_vision_crossplatform/widgets/BarcodeScanner.dart';
 import 'package:buy_vision_crossplatform/widgets/Preview.dart';
 import 'package:buy_vision_crossplatform/widgets/TextPage.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class Home extends StatelessWidget {
             child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return CameraScreen();
+                    return const CameraScreen();
                   }));
                 },
                 child: const Text(str_help_read))),
@@ -30,7 +31,7 @@ class Home extends StatelessWidget {
             child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return CameraScreen();
+                    return const BarcodeScanner();
                   }));
                 },
                 child: const Text(str_help_search))),

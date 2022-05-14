@@ -16,6 +16,6 @@ class GS1Repository {
     var company = document.getElementsByClassName("product-card__header-company")[0].innerHtml.trim();
     var name = document.getElementsByTagName("table")[1].getElementsByTagName("tr")[2].getElementsByClassName("text2")[0].innerHtml.trim();
     var weight = document.getElementsByTagName("table")[1].getElementsByTagName("tr")[3].getElementsByClassName("text2")[0].innerHtml.trim();
-    return ItemModel(name: name)..description=description..weight=weight;
+    return ItemModel(code: "01234567890");
   }
 }
