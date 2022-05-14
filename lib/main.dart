@@ -9,6 +9,7 @@ import '../di/dependencies.dart' as di;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+/*
   di.targetLanguage = "ru";
   di.cameraDescription = await getCamera();
   if (di.cameraDescription == null) {
@@ -19,6 +20,7 @@ Future<void> main() async {
             icon: Icon(Icons.camera_alt, color: Colors.black))));
     return;
   }
+*/
 
   runApp(const MaterialApp(
       debugShowCheckedModeBanner: false, home: SafeArea(child: Home())));
