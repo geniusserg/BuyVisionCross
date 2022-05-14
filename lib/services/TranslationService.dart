@@ -1,34 +1,25 @@
-// Yandex Cloud -> Language -> Translation API
+// Yandex Cloud -> Translate -> Text Translation API
 // Need OAuth token
 
-import 'dart:convert';
-import 'package:buy_vision_crossplatform/models/YandexCloudVisionRequest.dart';
+import 'package:buy_vision_crossplatform/models/YandexCloudTranslateRequest.dart';
 import 'package:buy_vision_crossplatform/services/Service.dart';
-import 'package:camera/camera.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import '../di/checkInternetConnection.dart';
-import 'package:http/http.dart' as http;
 
 class TranslationService {
   static String reqUrl =
-      "https://vision.api.cloud.yandex.net/vision/v1/batchAnalyze";
+      "https://translate.api.cloud.yandex.net/translate/v2/translate";
 
-  static Future<String> execute(
-      {required YandexCloudVisionRequest request}) async {
-    if (!hasInternet()) {
-      throw Exception("No internet connection");
+  static Future<String?> execute({required YandexCloudTranslateRequest request}) async {
+    var jsn = await request.getJson();
+    String result = await YandexService.sendRequest(reqUrl, jsn);
+    RegExp exp =  RegExp("\"text\": \".*\"");
+    RegExp exp_err =  RegExp("\"message\" : \".*\"");
+    Iterable err = exp_err.allMatches(result);
+    if (err.isNotEmpty){
+      throw Exception("API Error");
     }
-
-    var result = await YandexService.sendRequest(reqUrl, request.toString());
-    Map<String, dynamic> dictResult = json.decode(result);
-    if (dictResult.containsKey("code")) {
-      Exception("No access to API");
-    }
-
-    // change on real when cloud is running
-    return Future.delayed(Duration(milliseconds: 3000), () {
-      return "Масло олейна 5 грамм. Срок годности 5 суток. Хранить в погребе.";
-    });
+    List<String> tmpl = [];
+    exp.allMatches(result).forEach((key) => tmpl.add(result.substring(key.start+9, key.end-1)));
+    return tmpl.isNotEmpty ? tmpl.join(" ") : null;
   }
 }
+
