@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
   Map<String, String> properties;
-  ProductCard({Key? key, required this.properties}) : super(key: key);
+  ProductCard( {Key? key, required this.properties}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

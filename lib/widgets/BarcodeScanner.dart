@@ -1,4 +1,5 @@
 import 'package:buy_vision_crossplatform/widgets/ProductSearch.dart';
+import 'package:buy_vision_crossplatform/widgets/search/SearchPage.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_mobile_vision/qr_camera.dart';
 import 'package:qr_mobile_vision/qr_mobile_vision.dart';
@@ -21,7 +22,7 @@ class BarcodeScanner extends StatelessWidget{
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ProductSearchPage(code: code),
+              builder: (context) => SearchPage(code: code),
             ),
           );
         },

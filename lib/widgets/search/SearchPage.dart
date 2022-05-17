@@ -8,6 +8,8 @@ import 'package:http/http.dart' as http;
 
 import '../../resources/strings.dart';
 import '../../styles/TextStyles.dart';
+import 'ProductCard.dart';
+import 'ProductHeader.dart';
 
 class SearchPage extends StatefulWidget {
   late Future<String?> nameInfo;
@@ -37,9 +39,14 @@ class SearchPage extends StatefulWidget {
       if (value == null){
         state = "nf";
         searchInfo = Future(() => null);
+        name = value;
         return null;
       }
-      searchInfo = ShopSearch.getInfo(value);
+      searchInfo = ShopSearch.getInfo(value).then((v) {
+        state = "found";
+        searchInfoValue = v;
+        return v;
+      });
       return value;
     });
   }
@@ -54,6 +61,24 @@ class SearchPage extends StatefulWidget {
       case "found":
         return _SearchPageStateFound();
     }
+    return _NotFoundState();
+  }
+}
+
+class _NotFoundState extends State<SearchPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: SafeArea(
+            child: Container(
+                alignment: Alignment.center,
+                height: 200,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Icon(Icons.search_off, color: Colors.black, size: 128.0),
+                      Text(str_error, style: styleError, textAlign: TextAlign.center)
+                    ]))));
   }
 }
 
@@ -63,12 +88,19 @@ class _SearchPageStateFound extends State<SearchPage>{
     return Column(
         children:
         [
-          ProductHeader(widget.productInfo)
-        ]FutureBuilder(
-        future:
-        builder: (c, snapshot){
-
-    });
+          ProductHeader(name: widget.name!),
+          FutureBuilder(
+            future: widget.searchInfo,
+            builder: (c, snapshot){
+              if (snapshot.connectionState == ConnectionState.done) {
+                if (widget.productInfoValue == null){
+                  return Text(str_not_found);
+                }
+                return ProductCard(properties: widget.productInfoValue!);
+              }
+              return widget.loadingWidget();
+          })
+        ]);
   }
 }
 
