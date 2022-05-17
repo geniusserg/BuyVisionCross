@@ -2,7 +2,7 @@ import 'package:html/parser.dart';
 import 'package:http/http.dart';
 
 class BarcodeRepository {
-  static Future<String> getInfo(gtin) async {
+  static Future<String?> getInfo(String gtin) async {
     var response = await Client().get(Uri.parse(
         "https://barcode-list.ru/barcode/RU/%D0%9F%D0%BE%D0%B8%D1%81%D0%BA.htm?barcode=$gtin"));
     if (response.statusCode != 200) {

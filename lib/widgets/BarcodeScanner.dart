@@ -1,6 +1,10 @@
 import 'package:buy_vision_crossplatform/widgets/ProductSearch.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_mobile_vision/qr_camera.dart';
+import 'package:qr_mobile_vision/qr_mobile_vision.dart';
+
+import '../resources/strings.dart';
+import '../styles/TextStyles.dart';
 
 class BarcodeScanner extends StatelessWidget{
   const BarcodeScanner({Key? key}) : super(key: key);
@@ -13,6 +17,7 @@ class BarcodeScanner extends StatelessWidget{
           if (code == null){
             throw Exception("Barcode was not found");
           }
+          QrMobileVision.stop();
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -20,6 +25,16 @@ class BarcodeScanner extends StatelessWidget{
             ),
           );
         },
+      notStartedBuilder: (context){
+        return Center(
+            child: Column(children: const [
+              CircularProgressIndicator(),
+              Text(
+                str_loading,
+                style: styleTextRecognized,
+              )
+            ]));
+      },
       ),
     );
   }

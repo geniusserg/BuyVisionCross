@@ -12,3 +12,4 @@ const String str_loading = "загрузка";
 
 const String str_back = "сделать новый снимок";
 const String str_speech = "озвучить текст";
+const String str_manufacturer_not_found = "производитель не найден";

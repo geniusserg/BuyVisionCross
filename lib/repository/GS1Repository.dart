@@ -5,7 +5,7 @@ import "package:http/http.dart" as http;
 import 'package:html/parser.dart';
 
 class GS1Repository {
-  static Future<Map<String, dynamic>> getInfo(gtin) async {
+  static Future<Map<String, String>?> getInfo(String gtin) async {
     var response = await http.Client()
         .get(Uri.parse("https://srs.gs1ru.org/id/gtin/$gtin"));
     if (response.statusCode != 200) {

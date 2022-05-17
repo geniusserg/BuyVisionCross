@@ -10,42 +10,43 @@ class TextPage extends StatelessWidget {
   String? text;
   String state = "stop";
   FlutterTts? tts;
-  TextPage({Key? key, required this.path}) : super(key: key);
+  TextPage({Key? key, required this.path}) : super(key: key) {
+  }
 
   Widget speechButton() {
     return FloatingActionButton(
-        child: const Icon(Icons.record_voice_over_outlined),
-        onPressed: () {
-          tts ??= FlutterTts();
-          tts!.pauseHandler = () {
-            state = "stop";
-          };
-          tts!.completionHandler = () {
-            state = "stop";
-          };
-          if (state == "stop") {
-            tts!.speak(text ?? str_loading);
-            state = "play";
-          } else {
-            tts!.stop();
-            state = "stop";
-          }
-        });
+      child: Icon(Icons.record_voice_over_outlined),
+      onPressed: () {
+        tts ??= FlutterTts();
+        tts!.pauseHandler = () {
+          state = "stop";
+        };
+        tts!.completionHandler = () {
+          state = "stop";
+        };
+        if (state == "stop") {
+          tts!.speak(text ?? str_loading);
+          state = "play";
+        } else {
+          tts!.stop();
+          state = "stop";
+        }
+    });
   }
 
   Widget backButton(BuildContext context) {
     return FloatingActionButton(
-        heroTag: "sdf",
-        child: Icon(Icons.turn_left),
-        onPressed: () {
-          tts!.stop();
-          Navigator.pop(context);
-        });
+      heroTag: "sdf",
+      child:Icon(Icons.turn_left),
+      onPressed: () {
+      tts!.stop();
+      Navigator.pop(context);
+    });
   }
 
   Widget loadingWidget() {
     return Center(
-        child: Column(children: const [
+        child: Column(children: [
       CircularProgressIndicator(),
       Text(
         str_loading,
@@ -65,12 +66,10 @@ class TextPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Semantics(child: backButton(context), label: str_speech),
-                  talkbackActivated
-                      ? Semantics(child: speechButton(), label: str_back)
-                      : Semantics()
+                  talkbackActivated ? Semantics(): Semantics(child: speechButton(), label: str_back)
                 ]),
             body: FutureBuilder(
-                future: RecognitionService.executeAll(
+                future: RecognitionService.execute(
                     request: YandexCloudVisionRequest(path: path)),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
