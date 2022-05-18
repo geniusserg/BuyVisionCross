@@ -1,4 +1,5 @@
-import 'package:html/parser.dart';
+import 'package:html/dom.dart' as dom;
+import 'package:html/parser.dart' ;
 import 'package:http/http.dart';
 
 class BarcodeRepository {
@@ -8,15 +9,17 @@ class BarcodeRepository {
     if (response.statusCode != 200) {
       throw Exception("Not found");
     }
-    var document = parse(response.body);
-    var barcodeDescription = document
-        .getElementsByClassName("randomBarcodes")[0]
+    List<dom.Element> barcodeDescription = parse(response.body)
+        .getElementsByClassName("randomBarcodes");
+    if (barcodeDescription.isEmpty){
+      return null;
+    }
+    String barcodeDescriptionString = barcodeDescription[0]
         .getElementsByTagName("tbody")[0]
         .getElementsByTagName("tr")[1]
         .getElementsByTagName("td")[2]
         .innerHtml
         .trim();
-
-    return barcodeDescription;
+    return barcodeDescriptionString;
   }
 }

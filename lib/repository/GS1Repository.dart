@@ -9,7 +9,7 @@ class GS1Repository {
     var response = await http.Client()
         .get(Uri.parse("https://srs.gs1ru.org/id/gtin/$gtin"));
     if (response.statusCode != 200) {
-      throw Exception("Not found");
+      return null; // not found
     }
     var document = parse(response.body);
     var description = document

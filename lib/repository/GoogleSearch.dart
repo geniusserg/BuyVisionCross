@@ -7,7 +7,7 @@ class GoogleSearch {
 
   static Future<List<String>> execute(String query) async {
     String token = googleToken;
-    var req = requestUrl + "?cx=$googleEng&key=$googleToken&q=query";
+    var req = requestUrl + "?cx=$googleEng&key=$googleToken&q=$query";
     String? result = (await Client().get(Uri.parse(req))).body;
     RegExp exp = RegExp("\"link\": \".*\"");
     RegExp exp_err = RegExp("\"message\" : \".*\"");

@@ -12,7 +12,7 @@ class ShopSearch{
     "spar-online.ru"  : Spar()
   };
 
-  static Future<Map<String, String>?> parse(String url){
+  static Future<Map<String, String?>?> parse(String url){
     RegExp searchUrl = RegExp("https://.*/");
     String? shop = searchUrl.firstMatch(url)![0];
     if (shop == null || !shopParsers.containsKey(shop)) {
@@ -21,11 +21,11 @@ class ShopSearch{
     return shopParsers[shop]!.execute(url);
   }
 
-  static Future<List<Map<String, String>>?> getInfo(String searchString) async{
+  static Future<List<Map<String, String?>>?> getInfo(String searchString) async{
     List<String> urls = await GoogleSearch.execute(searchString);
-    List<Map<String, String>?> result = [];
+    List<Map<String, String?>?> result = [];
     for (String url in urls){
-      result.add(await parse(url));
+      result.add(await ShopSearch.parse(url));
     }
     result.remove(null);
   }
