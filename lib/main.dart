@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:buy_vision_crossplatform/resources/strings.dart';
 import 'package:buy_vision_crossplatform/widgets/ErrorConnection.dart';
+import 'package:buy_vision_crossplatform/widgets/search/SearchPage.dart';
 import 'di/getCamera.dart';
 import 'package:buy_vision_crossplatform/widgets/Home.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,6 @@ Future<void> main() async {
   }
 */
 
-  runApp(const MaterialApp(
-      debugShowCheckedModeBanner: false, home: SafeArea(child: Home())));
+  runApp(MaterialApp(
+      debugShowCheckedModeBanner: false, home: SafeArea(child: Scaffold(body: SearchPage(code: "4605922011859")))));
 }

@@ -35,85 +35,33 @@ class SearchPage extends StatefulWidget {
   }
 
   SearchPage({Key? key, required this.code}) : super(key: key){
-    nameInfo = BaseSearch.getInfo(code).then((value) {
-      if (value == null){
-        state = "nf";
-        searchInfo = Future(() => null);
-        name = value;
-        return null;
-      }
-      searchInfo = ShopSearch.getInfo(value).then((v) {
-        state = "found";
-        searchInfoValue = v;
-        return v;
-      });
-      return value;
+    nameInfo = BaseSearch.getInfo(code).then((val) {
+      name = val;
     });
   }
 
   @override
-  State<SearchPage> createState(){
-    switch (state){
-      case "load":
-        return _SearchPageLoading();
-      case "nf":
-        return _NotFoundState();
-      case "found":
-        return _SearchPageStateFound();
-    }
-    return _NotFoundState();
-  }
+  State<SearchPage> createState() => _SearchPageStateFound();
+
 }
 
-class _NotFoundState extends State<SearchPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: SafeArea(
-            child: Container(
-                alignment: Alignment.center,
-                height: 200,
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Icon(Icons.search_off, color: Colors.black, size: 128.0),
-                      Text(str_error, style: styleError, textAlign: TextAlign.center)
-                    ]))));
-  }
-}
 
 class _SearchPageStateFound extends State<SearchPage>{
   @override
   Widget build(BuildContext context) {
-    return Column(
-        children:
-        [
-          ProductHeader(name: widget.name!),
+    return
           FutureBuilder(
-            future: widget.searchInfo,
+            future: widget.nameInfo,
             builder: (c, snapshot){
               if (snapshot.connectionState == ConnectionState.done) {
                 if (widget.productInfoValue == null){
                   return Text(str_not_found);
                 }
-                return ProductCard(properties: widget.productInfoValue!);
+                return Text(widget.name!);
               }
               return widget.loadingWidget();
-          })
-        ]);
+          });
   }
 }
 
-class _SearchPageLoading extends State<SearchPage>{
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: widget.productInfo,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            setState(() {});
-          }
-          return widget.loadingWidget();
-    });
-  }
-}
+
