@@ -9,7 +9,7 @@ class Auchan implements Shop{
     var response = await http.Client()
         .get(Uri.parse(url), headers: {
           "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36 Edg/101.0.1210.39",
-          "Cookie": "mindboxDeviceUUID=0; directCrm-session=0; isAddressPopupShown_=true; region_id=1; merchant_ID_=1; methodDelivery_=1; _GASHOP=001_Mitishchi; _ym_uid=1; _ym_d=1652876866; tmr_lvid=8; tmr_lvidTS=1; rrpvid=1; _ym_isad=2; rcuid=8; rrviewed=830811; qrator_jsid=1652881922.335.kJJKO0oxU0nVRaSd-5l7ubprpgu3dbjhqqmu8rm1hj8qao8kt; rr-viewItemId=830811; rrlevt=10; tmr_detect=06; tmr_reqNum=31"
+          "Cookie": "mindboxDeviceUUID=317e5716-e3ef-46a4-b424-cda9ac1981aa; directCrm-session=%7B%22deviceGuid%22%3A%22317e5716-e3ef-46a4-b424-cda9ac1981aa%22%7D; tmr_lvid=96ed3bf98828b971bfeb3417322538fb; tmr_lvidTS=1650267391292; isAddressPopupShown_=true; region_id=1; merchant_ID_=1; methodDelivery_=1; _GASHOP=001_Mitishchi; _ym_uid=1650267393544306546; _ym_d=1650267393; rrpvid=566790918484082; rcuid=625d15039ad0b80001e911cb; qrator_jsr=1652965795.956.LoHupt8OvL0Z60Y2-arj1qlcl5o19p2bodltueqkk3edm8gmu-00; qrator_ssid=1652965797.583.oVDswufHlreogtCj-99h6v8g29dtflk66crv6r0bb413i7dkt; qrator_jsid=1652965795.956.LoHupt8OvL0Z60Y2-q5ql45rdntt3bcnvfeqhnfotkh84kelo; rr-viewItemId=830811; rrviewed=830811; _ym_isad=2; rrlevt=1652965806877; tmr_detect=0%7C1652965815517; tmr_reqNum=161"
         });
     if (response.statusCode != 200) {
       throw Exception("Not found");

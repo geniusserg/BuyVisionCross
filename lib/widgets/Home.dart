@@ -1,15 +1,9 @@
-import 'dart:developer';
-import 'dart:io';
-
 import 'package:buy_vision_crossplatform/resources/strings.dart';
-import 'package:buy_vision_crossplatform/services/RecognitionService.dart';
+import 'package:buy_vision_crossplatform/styles/TextStyles.dart';
 import 'package:buy_vision_crossplatform/widgets/BarcodeScanner.dart';
 import 'package:buy_vision_crossplatform/widgets/Preview.dart';
-import 'package:buy_vision_crossplatform/widgets/TextPage.dart';
+import 'package:buy_vision_crossplatform/widgets/search/SearchPage.dart';
 import 'package:flutter/material.dart';
-import 'package:image_downloader/image_downloader.dart';
-
-import '../models/YandexCloudVisionRequest.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -18,31 +12,50 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Expanded(
-            child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return const CameraScreen();
-                  }));
-                },
-                child: const Text(str_help_read))),
+            child: Padding(
+          padding: EdgeInsets.all(12),
+        
+          child: ElevatedButton(
+            
+              style: ButtonStyle(),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const CameraScreen();
+                }));
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                const Icon(Icons.zoom_in, size: 200, semanticLabel: "look up"),
+                const Text(str_help_read, style: styleMenu)
+              ])),
+        )),
         Expanded(
-            child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return const BarcodeScanner();
-                  }));
-                },
-                child: const Text(str_help_search))),
-        Expanded(
-            child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return TextPage(path: "/storage/emulated/0/DCIM/line-indent.png");
-                  }));
-                },
-                child: const Text("TEST FUNCTIONALITY")))
+            child: Padding(
+          padding: EdgeInsets.all(12),
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return const BarcodeScanner();
+              }));
+            },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+              const Icon(Icons.qr_code_scanner,
+                  size: 200, semanticLabel: "look up"),
+              const Text(str_help_search, style: styleMenu)
+            ])))),
+        ElevatedButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return SearchPage(code: "4605922011859");
+              }));
+            },
+            child: const Text("TEST FUNCTIONALITY"))
       ],
     ));
   }

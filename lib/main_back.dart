@@ -4,15 +4,15 @@ import 'package:buy_vision_crossplatform/repository/GS1Repository.dart';
 import 'package:buy_vision_crossplatform/repository/GoogleSearch.dart';
 import 'package:buy_vision_crossplatform/repository/Lenta.dart';
 
-Future<void> main() async{
+Future<void> main() async {
   String gtin = "4605922011859";
   //print(await BarcodeRepository.getInfo(gtin));
   String? product = await BarcodeRepository.getInfo(gtin);
-  if (product != null){
+  if (product != null) {
     List<String> urls = [];
     urls = await GoogleSearch.execute(product);
+    print(urls);
     print(await Lenta().execute(urls[0]));
     print(await Auchan().execute(urls[2]));
   }
-
 }

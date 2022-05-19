@@ -24,5 +24,5 @@ Future<void> main() async {
 */
 
   runApp(MaterialApp(
-      debugShowCheckedModeBanner: false, home: SafeArea(child: Scaffold(body: SearchPage(code: "4605922011859")))));
+      debugShowCheckedModeBanner: false, home: SafeArea(child: Home())));
 }

@@ -13,28 +13,17 @@ import 'ProductHeader.dart';
 
 class SearchPage extends StatefulWidget {
   late Future<String?> nameInfo;
-  late Future<Map<String, String>?> productInfo;
-  late Future<List<Map<String, String>>?> searchInfo;
+  //late Future<Map<String, String>?> productInfo;
+  //late Future<List<Map<String, String>>?> searchInfo;
 
-  late String? name;
-  late Map<String, String>? productInfoValue;
-  late List<Map<String, String>>? searchInfoValue;
+  String? name;
+  Map<String, String>? productInfoValue;
+  List<Map<String, String>>? searchInfoValue;
 
   String state = "load";
   String code;
 
-  Widget loadingWidget() {
-    return Center(
-        child: Column(children: [
-          CircularProgressIndicator(),
-          Text(
-            str_loading,
-            style: styleTextRecognized,
-          )
-        ]));
-  }
-
-  SearchPage({Key? key, required this.code}) : super(key: key){
+  SearchPage({Key? key, required this.code}) : super(key: key) {
     nameInfo = BaseSearch.getInfo(code).then((val) {
       name = val;
     });
@@ -42,26 +31,49 @@ class SearchPage extends StatefulWidget {
 
   @override
   State<SearchPage> createState() => _SearchPageStateFound();
-
 }
 
+class _SearchPageStateFound extends State<SearchPage> {
+  Widget loadingWidget() {
+    return SizedBox.expand(
+        child: Container(
+            alignment: Alignment.center,
+            child: Column(children: [
+              CircularProgressIndicator(),
+              Text(
+                str_loading,
+                style: styleTextRecognized,
+              )
+            ])));
+  }
 
-class _SearchPageStateFound extends State<SearchPage>{
+
+  Widget buildHeader(String? text) {
+    return  Container(
+            alignment: Alignment.center,
+            child: Container(
+                child: Padding(
+                    padding: EdgeInsets.all(12),
+      child: Text(text ?? str_not_found, style: styleTextRecognized),
+    )));
+  }
+
   @override
   Widget build(BuildContext context) {
-    return
-          FutureBuilder(
+    return Scaffold(
+        appBar: AppBar(
+            backgroundColor: Color(0xFF94CCF9),
+            title: Text(str_search_results, style: styleHeader)),
+        body: FutureBuilder(
             future: widget.nameInfo,
-            builder: (c, snapshot){
+            builder: (c, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
-                if (widget.productInfoValue == null){
-                  return Text(str_not_found);
+                if (widget.name == null) {
+                  return Text(str_not_found, style: styleTextRecognized);
                 }
-                return Text(widget.name!);
+                return buildHeader(widget.name!);
               }
-              return widget.loadingWidget();
-          });
+              return loadingWidget();
+            }));
   }
 }
-
-
