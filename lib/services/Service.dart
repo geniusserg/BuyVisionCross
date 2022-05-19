@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:buy_vision_crossplatform/di/dependencies.dart' as di;
 import 'package:http/http.dart' as http;
 import '../tokens.dart';
 
@@ -33,8 +31,10 @@ class YandexService {
           "Content-Type": "application/json",
           "Authorization": "Bearer $token"
         },
-        body: requestJson);
-    return response.body;
+        body: requestJson,
+        encoding: Encoding.getByName("UTF-8"));
+    print(utf8.decode(response.bodyBytes));
+    return utf8.decode(response.bodyBytes);
   }
 
   static void execute() {

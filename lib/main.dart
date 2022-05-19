@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:buy_vision_crossplatform/resources/strings.dart';
 import 'package:buy_vision_crossplatform/widgets/ErrorConnection.dart';
+import 'package:buy_vision_crossplatform/widgets/TextPage.dart';
 import 'package:buy_vision_crossplatform/widgets/search/SearchPage.dart';
 import 'di/getCamera.dart';
 import 'package:buy_vision_crossplatform/widgets/Home.dart';
@@ -18,11 +19,12 @@ Future<void> main() async {
         debugShowCheckedModeBanner: false,
         home: ErrorPage(
             error: str_camera_error,
-            icon: Icon(Icons.camera_alt, color: Colors.black))));
+            icon: Icons.warning)));
     return;
   }
 */
 
   runApp(MaterialApp(
-      debugShowCheckedModeBanner: false, home: SafeArea(child: Home())));
+      theme: ThemeData(primaryColor: Colors.brown, secondaryHeaderColor: Colors.brown),
+      debugShowCheckedModeBanner: false, home: SafeArea(child: TextPage(path: '',))));
 }
