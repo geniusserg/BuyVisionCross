@@ -21,7 +21,7 @@ Future<void> main() async {
     print(await Auchan().execute(urls[2]));
   }
   */
-  String text = "Hello world! Привет мир!";
+  String text = "Hello world!";
   print(await TranslationService.execute(
-      request: YandexCloudTranslateRequest(text: )));
+      request: YandexCloudTranslateRequest(text: [text])));
 }
