@@ -30,6 +30,11 @@ jobs:
     # Get flutter dependencies.
     - run: flutter pub get
     
+    - run: echo 'String authToken = "AeeIXUMjbmR0A";' >> ./lib/tokens.dart
+    - run: echo 'String folderId = "e0w_LoUGeoIXUMjbmR0A";' >> ./lib/tokens.dart
+    - run: echo 'String googleEng = "eGeoIXUMjbmR0A";' >> ./lib/tokens.dart
+    - run: echo 'String googleToken = "eUMjbmR0A";' >> ./lib/tokens.dart
+    
     # Statically analyze the Dart code for any errors.
     - run: flutter analyze .
     
