@@ -17,4 +17,8 @@ jobs:
         flutter-version: '2.10.4'
         architecture: x64
     - run: flutter pub get
+    - run: echo 'String authToken = "AeeIXUMjbmR0A";' >> ./lib/tokens.dart
+    - run: echo 'String folderId = "e0w_LoUGeoIXUMjbmR0A";' >> ./lib/tokens.dart
+    - run: echo 'String googleEng = "eGeoIXUMjbmR0A";' >> ./lib/tokens.dart
+    - run: echo 'String googleToken = "eUMjbmR0A";' >> ./lib/tokens.dart
     - run: flutter build ios --release --no-codesign
