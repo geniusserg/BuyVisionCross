@@ -49,13 +49,6 @@ class Home extends StatelessWidget {
                   size: 200, semanticLabel: "look up"),
               const Text(str_help_search, style: styleMenu)
             ])))),
-        ElevatedButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return SearchPage(code: "4605922011859");
-              }));
-            },
-            child: const Text("TEST FUNCTIONALITY"))
       ],
     ));
   }

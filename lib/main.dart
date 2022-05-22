@@ -28,9 +28,6 @@ Future<void> main() async {
 
   runApp(MaterialApp(
       theme: ThemeData(primaryColor: Colors.brown, secondaryHeaderColor: Colors.brown),
-      debugShowCheckedModeBanner: false, home: SafeArea(child: SearchList(results: [
-        {"name": "okgsdfghiolkdgsfghjkl;kdfghjkl;jsf", "image": "", "price": "54", "Условия Хранения": "0"},
-    {"name": "okgsdfghiolkdgsfghjkl;kdfghjkl;jsf", "image": "", "price": "54", "Условия Хранения": "0"}
-  ],))));
+      debugShowCheckedModeBanner: false, home: SafeArea(child: Home())));
 
 }
