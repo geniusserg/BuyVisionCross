@@ -2,6 +2,8 @@ import 'package:buy_vision_crossplatform/repository/BarcodeList.dart';
 import 'package:buy_vision_crossplatform/repository/BaseSearch.dart';
 import 'package:buy_vision_crossplatform/repository/GS1Repository.dart';
 import 'package:buy_vision_crossplatform/repository/ShopsSearch.dart';
+import 'package:buy_vision_crossplatform/services/SpeechService.dart';
+import 'package:buy_vision_crossplatform/widgets/elements/CommonElements.dart';
 import 'package:buy_vision_crossplatform/widgets/search/SearchList.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,11 +17,12 @@ import 'ProductCard.dart';
 
 class SearchPage extends StatefulWidget {
   late Future<Map<String, String?>?> productInfo;
-
+  late SpeechService speechService;
   Map<String, String>? productInfoValue;
   String code = "";
 
   SearchPage({Key? key, required this.code}) : super(key: key) {
+    speechService = SpeechService();
     productInfo = BaseSearch.getInfo(code).then((val) {
       productInfoValue = {};
       val.forEach((key, value) {
@@ -51,52 +54,13 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageStateFound extends State<SearchPage> {
-  FlutterTts? tts;
-  String state = "stop";
-
-  Widget loadingWidget() {
-    return SizedBox.expand(
-        child: Container(
-            alignment: Alignment.center,
-            child: Column(children: [
-              CircularProgressIndicator(),
-              Text(
-                str_loading,
-                style: styleTextRecognized,
-              )
-            ])));
-  }
-
   void speechButton(BuildContext context) {
-    var talkbackActivated = MediaQuery.of(context).accessibleNavigation;
-    if (talkbackActivated) {
-      return;
-    }
-    if (widget.productInfoValue == null) {
-      return;
-    }
-    tts ??= FlutterTts();
-    tts!.pauseHandler = () {
-      state = "stop";
-    };
-    tts!.completionHandler = () {
-      state = "stop";
-    };
-    if (state == "stop") {
-      tts!.speak(widget.productInfoValue != null
-          ? widget.productInfoValue.toString()
-          : str_loading);
-      state = "play";
-    } else {
-      tts!.stop();
-      state = "stop";
-    }
+    widget.speechService
+        .speak(context, widget.productInfoValue.toString(), str_shop_not_found);
   }
 
   void backButton(BuildContext context) {
-    if (tts != null) {
-      tts!.stop();
-    }
+    widget.speechService.stop();
     Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
   }
 

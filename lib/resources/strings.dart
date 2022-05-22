@@ -25,7 +25,7 @@ const String str_label_photo = "Фото продукта";
 const String str_more_button = "ВАРИАНТЫ";
 const String str_options = "Характеристики";
 const String str_product_not_found = "Продукт не найден в базе";
-
+const String str_loading_icon = "Индикатор загрузки";
 // Shops
 const String str_auchan = "Ашан";
 const String str_barcode_list = "База данных штрихкодов";

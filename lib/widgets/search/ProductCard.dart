@@ -15,13 +15,13 @@ class ProductCard extends StatelessWidget {
     String? image = properties!['image'];
 
     return ListView.builder(
-      padding: EdgeInsets.symmetric(horizontal: 12),
+      padding: EdgeInsets.all(12),
       shrinkWrap: true,
       scrollDirection: Axis.vertical,
       itemBuilder: (context, index) {
         switch (index) {
           case 0:
-            return Container(height: 15); // Define how to show a shop
+            return Container(height: 0); // Define how to show a shop
           case 1:
             return Column(children: [
               Text(name, style: styleTextRecognized),
@@ -40,12 +40,15 @@ class ProductCard extends StatelessWidget {
               return Column(children: [
                 (image != null && image != "")
                     ? TextButton(
+
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) =>
                                   ShowPicturePage(path: image)));
                         },
-                        child: Row(
+                        child: Container(
+                          decoration: BoxDecoration(border: Border.all(width: 0.5)),
+                          child:Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(
@@ -61,10 +64,11 @@ class ProductCard extends StatelessWidget {
                                 str_show_picture,
                                 style: styleShortElementDescription,
                               )
-                            ]))
+                            ])))
                     : Divider(),
-                Container(height: 30),
-                Text(str_options, style: styleHeadList)
+                Container(height: 10),
+                Divider(thickness: 14),
+                Container(height: 10),
               ]);
             }
         }
@@ -73,8 +77,7 @@ class ProductCard extends StatelessWidget {
           children: [
             Text(prop.key, style: styleHeadList),
             Container(
-              height: 8,
-              width: 1,
+              height: 10,
             ),
             Text(prop.value, style: styleValueList),
             Divider()

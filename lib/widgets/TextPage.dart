@@ -3,6 +3,7 @@ import 'package:buy_vision_crossplatform/services/RecognitionService.dart';
 import 'package:buy_vision_crossplatform/services/SpeechService.dart';
 import 'package:buy_vision_crossplatform/styles/TextStyles.dart';
 import 'package:buy_vision_crossplatform/widgets/Home.dart';
+import 'package:buy_vision_crossplatform/widgets/elements/CommonElements.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import '../models/YandexCloudTranslateRequest.dart';
@@ -44,16 +45,6 @@ class TextPageState extends State<TextPage> {
     setState(() {});
   }
 
-  Widget loadingWidget() {
-    return Center(
-        child: Column(children: [
-      CircularProgressIndicator(),
-      Text(
-        str_loading,
-        style: styleTextRecognized,
-      )
-    ]));
-  }
 
   Widget bottomBar(BuildContext context) {
     return BottomAppBar(
@@ -114,6 +105,7 @@ class TextPageState extends State<TextPage> {
                   widget.text = (snapshot.data as String?) ?? str_not_found;
                 }
                 return SingleChildScrollView(
+                  padding: EdgeInsets.all(12),
                   child: Text(widget.text!, style: styleTextRecognized),
                 );
               }

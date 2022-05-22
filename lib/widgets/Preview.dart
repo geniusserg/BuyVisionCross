@@ -36,14 +36,12 @@ class _CameraScreenState extends State<CameraScreen> {
   // returns the image path
   Future<String?> _takePicture() async {
     if (!_controller.value.isInitialized) {
-      print("camerapreview -> takepicture : Controller is not initialized");
       return null;
     }
 
     String? imagePath;
 
     if (_controller.value.isTakingPicture) {
-      print("camerapreview -> takepicture : Processing is progress ...");
       return null;
     }
 
@@ -55,7 +53,6 @@ class _CameraScreenState extends State<CameraScreen> {
       // Retrieving the path
       imagePath = file.path;
     } on CameraException catch (e) {
-      print(" camerapreview -> takepicture : Camera Exception: $e");
       return null;
     }
 
@@ -63,9 +60,8 @@ class _CameraScreenState extends State<CameraScreen> {
   }
 
   Future<void> handleTakingPicture() async {
-    // If the returned path is not null navigate
-    // to the DetailScreen
     await _takePicture().then((String? path) {
+        //_controller.dispose(); // maybe issue here?
         if (path != null) {
           Navigator.push(
             context,
@@ -73,8 +69,6 @@ class _CameraScreenState extends State<CameraScreen> {
               builder: (context) => TextPage(path: path),
             ),
           );
-        } else {
-          log('cameraPreview -> takepicture : file not found $path');
         }
     });
   }
