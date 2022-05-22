@@ -1,5 +1,6 @@
 import 'package:buy_vision_crossplatform/resources/strings.dart';
 import 'package:buy_vision_crossplatform/services/RecognitionService.dart';
+import 'package:buy_vision_crossplatform/services/SpeechService.dart';
 import 'package:buy_vision_crossplatform/styles/TextStyles.dart';
 import 'package:buy_vision_crossplatform/widgets/Home.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,9 @@ class TextPage extends StatefulWidget {
   late Future<String?> textActionFuture;
   String action = "recognize";
   String? text;
+  late SpeechService speechService;
   TextPage({Key? key, required this.path}) : super(key: key) {
+    speechService = SpeechService();
     textActionFuture = RecognitionService.execute(
         request: YandexCloudVisionRequest(path: path));
   }
@@ -22,33 +25,12 @@ class TextPage extends StatefulWidget {
 }
 
 class TextPageState extends State<TextPage> {
-  String state = "stop";
-  FlutterTts? tts;
   void speechButton(BuildContext context) {
-    var talkbackActivated = MediaQuery.of(context).accessibleNavigation;
-    if (talkbackActivated) {
-      return;
-    }
-    tts ??= FlutterTts();
-    tts!.pauseHandler = () {
-      state = "stop";
-    };
-    tts!.completionHandler = () {
-      state = "stop";
-    };
-    if (state == "stop") {
-      tts!.speak(widget.text ?? str_loading);
-      state = "play";
-    } else {
-      tts!.stop();
-      state = "stop";
-    }
+    widget.speechService.speak(context, widget.text, str_not_found);
   }
 
   void backButton(BuildContext context) {
-    if (tts != null) {
-      tts!.stop();
-    }
+    widget.speechService.stop();
     Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
   }
 
@@ -82,7 +64,6 @@ class TextPageState extends State<TextPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   TextButton(
-                      //onPressed: () {},
                       onPressed: () {
                         backButton(context);
                       },
@@ -94,7 +75,6 @@ class TextPageState extends State<TextPage> {
                           ]),
                       style: ButtonStyle()),
                   TextButton(
-                      //onPressed: () {},
                       onPressed: () {
                         speechButton(context);
                       },
@@ -130,8 +110,7 @@ class TextPageState extends State<TextPage> {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (widget.action == "translate") {
                   widget.text = (snapshot.data as String?) ?? widget.text;
-                }
-                else{
+                } else {
                   widget.text = (snapshot.data as String?) ?? str_not_found;
                 }
                 return SingleChildScrollView(

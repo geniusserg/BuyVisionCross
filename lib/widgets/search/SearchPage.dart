@@ -12,7 +12,6 @@ import '../../resources/strings.dart';
 import '../../styles/TextStyles.dart';
 import '../Home.dart';
 import 'ProductCard.dart';
-import 'ProductHeader.dart';
 
 class SearchPage extends StatefulWidget {
   late Future<Map<String, String?>?> productInfo;
@@ -40,19 +39,20 @@ class SearchPage extends StatefulWidget {
     });
   }
 
-  SearchPage.fromMap({Key? key, required Map<String, String> map}) : super(key: key) {
+  SearchPage.fromMap({Key? key, required Map<String, String> map})
+      : super(key: key) {
     productInfo = Future(() => map).then((val) {
       productInfoValue = map;
-      });
+    });
   }
 
   @override
   State<SearchPage> createState() => _SearchPageStateFound();
 }
 
-class _SearchPageStateFound extends State<SearchPage>{
+class _SearchPageStateFound extends State<SearchPage> {
   FlutterTts? tts;
-  String? state;
+  String state = "stop";
 
   Widget loadingWidget() {
     return SizedBox.expand(
@@ -72,6 +72,9 @@ class _SearchPageStateFound extends State<SearchPage>{
     if (talkbackActivated) {
       return;
     }
+    if (widget.productInfoValue == null) {
+      return;
+    }
     tts ??= FlutterTts();
     tts!.pauseHandler = () {
       state = "stop";
@@ -80,7 +83,9 @@ class _SearchPageStateFound extends State<SearchPage>{
       state = "stop";
     };
     if (state == "stop") {
-      tts!.speak(widget.productInfoValue.toString() ?? str_loading);
+      tts!.speak(widget.productInfoValue != null
+          ? widget.productInfoValue.toString()
+          : str_loading);
       state = "play";
     } else {
       tts!.stop();
@@ -96,9 +101,15 @@ class _SearchPageStateFound extends State<SearchPage>{
   }
 
   void moreOptions(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => SearchList()));
+    if (widget.productInfoValue == null) {
+      return;
+    }
+    if (widget.productInfoValue!['shop'] == "gs1.ru") {
+      return;
+    }
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => SearchList()));
   }
-
 
   Widget bottomBar(BuildContext context) {
     return BottomAppBar(
@@ -109,7 +120,6 @@ class _SearchPageStateFound extends State<SearchPage>{
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   TextButton(
-                    //onPressed: () {},
                       onPressed: () {
                         backButton(context);
                       },
@@ -121,7 +131,6 @@ class _SearchPageStateFound extends State<SearchPage>{
                           ]),
                       style: ButtonStyle()),
                   TextButton(
-                    //onPressed: () {},
                       onPressed: () {
                         speechButton(context);
                       },
@@ -144,7 +153,6 @@ class _SearchPageStateFound extends State<SearchPage>{
                 ])));
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -155,7 +163,8 @@ class _SearchPageStateFound extends State<SearchPage>{
             future: widget.productInfo,
             builder: (c, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
-                if (widget.productInfoValue == null || widget.productInfoValue!.isEmpty) {
+                if (widget.productInfoValue == null ||
+                    widget.productInfoValue!.isEmpty) {
                   return Text(str_not_found, style: styleTextRecognized);
                 }
                 return ProductCard(properties: widget.productInfoValue);
