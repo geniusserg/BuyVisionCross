@@ -8,7 +8,7 @@ import 'Shop.dart';
 
 class Lenta implements Shop{
   @override
-  Future<Map<String, String?>> execute(String url) async {
+  Future<Map<String, String?>?> execute(String url) async {
     var response = await http.Client()
         .get(Uri.parse(url));
     if (response.statusCode != 200) {
@@ -57,7 +57,7 @@ class Lenta implements Shop{
     }
 
 
-    var resultMap = {"shop": "lenta.com", "image": imageUrl, "description": description, "price": price};
+    var resultMap = {"name": description, "image": imageUrl, "price": price};
 
     /*PROPERTIES*/
     var it = document.getElementsByClassName("sku-card-tab-params__item");//[0].getElementsByClassName("sku-card-tab-params__item");

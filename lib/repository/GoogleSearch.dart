@@ -6,7 +6,6 @@ class GoogleSearch {
       "https://customsearch.googleapis.com/customsearch/v1";
 
   static Future<List<String>> execute(String query) async {
-    String token = googleToken;
     var req = requestUrl + "?cx=$googleEng&key=$googleToken&q=$query";
     String? result = (await Client().get(Uri.parse(req))).body;
     RegExp exp = RegExp("\"link\": \".*\"");

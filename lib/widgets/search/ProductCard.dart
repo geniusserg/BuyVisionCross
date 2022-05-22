@@ -18,25 +18,25 @@ class ProductCard extends StatelessWidget {
     String price = properties!['price'] ?? str_price_not_found;
     String? image = properties!['image'];
 
-    return Scaffold(body:
-      SingleChildScrollView(
-          child: ListView.builder(
+    return ListView.builder(
+      padding: EdgeInsets.symmetric(horizontal: 12),
             shrinkWrap: true,
+            scrollDirection: Axis.vertical,
             itemBuilder: (context, index) {
             switch(index){
               case 0:
-                return Column(children:[Text(name, style: styleTextRecognized), Container(height: 10)]);
+                return Column(children:[Container(height: 15), Text(name, style: styleTextRecognized), Container(height: 15)]);
               case 1:
                 return Column(children:[Text(str_price+price, style: styleTextRecognized), Container(height: 10)]);
               case 2:
-                return Column(children:[ image != null ?
+                return Column(children:[ (image != null && image != "") ?
                 TextButton(onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => ShowPicturePage(path: image)));
                 }, child:
                   Row(mainAxisAlignment: MainAxisAlignment.center, children:[
                   Icon(Icons.image_outlined, color: Colors.black, size: 36,),
                   Container(height: 10, width: 15,),
-                  Text(str_show_picture, style: styleShortElementDescription,)])) : Divider(), Container(height: 20)]);
+                  Text(str_show_picture, style: styleShortElementDescription,)])) : Divider(), Container(height: 30)]);
             }
             MapEntry<String, String> prop = properties!.entries.elementAt(index);
             return Column(
@@ -47,12 +47,9 @@ class ProductCard extends StatelessWidget {
                 Divider()
               ],
             );
-
-
           },
 
       itemCount: properties!.length,
-    )),
     );
 
   }

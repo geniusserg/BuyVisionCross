@@ -12,21 +12,37 @@ class ShopSearch{
     //"spar-online.ru"  : Spar()
   };
 
-  static Future<Map<String, String?>?> parse(String url){
-    RegExp searchUrl = RegExp("https://.*/");
-    String? shop = searchUrl.firstMatch(url)![0];
+  static Future<Map<String, String?>?> parse(String url) async{
+    final uri = Uri.parse(url);
+    String? shop = uri.host;
     if (shop == null || !shopParsers.containsKey(shop)) {
       return Future(() => null);
     }
-    return shopParsers[shop]!.execute(url);
+    Map<String, String?>? parsedSite;
+    try {
+      parsedSite = await shopParsers[shop]!.execute(url);
+    }
+    on Exception{
+      return Future(() => null);
+    }
+    on RangeError{
+      return Future(() => null);
+    }
+    return parsedSite;
   }
 
   static Future<List<Map<String, String?>>?> getInfo(String searchString) async{
     List<String> urls = await GoogleSearch.execute(searchString);
-    List<Map<String, String?>?> result = [];
-    for (String url in urls){
-      result.add(await ShopSearch.parse(url));
+    if (urls.isEmpty){
+      return null;
     }
-    result.remove(null);
+    List<Map<String, String?>> result = [];
+    for (String url in urls){
+      var t = await ShopSearch.parse(url);
+      if (t != null){
+        result.add(t);
+      }
+    }
+    return result;
   }
 }

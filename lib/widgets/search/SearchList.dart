@@ -2,11 +2,13 @@ import 'package:buy_vision_crossplatform/resources/strings.dart';
 import 'package:buy_vision_crossplatform/widgets/search/ProductCard.dart';
 import 'package:flutter/material.dart';
 
+import '../../styles/TextStyles.dart';
 import 'ProductCard.dart';
+import 'SearchPage.dart';
 
 class SearchList  extends StatelessWidget {
   SearchList ({Key? key, this.results}) : super(key: key);
-  List<Map<String, dynamic>>? results;
+  List<Map<String, String>>? results;
 
   String getIconPath(String shop){
     switch(shop){
@@ -21,34 +23,40 @@ class SearchList  extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (results == null) {
-      return const Text(str_not_found);
-    }
-    else {
-      return ListView.separated(
+    return
+      Scaffold(
+          appBar: AppBar(
+              backgroundColor: Color(0xFF94CCF9),
+              title: Text(str_search_results, style: styleHeader)),
+        body:
+      results == null ?
+       const Text(str_not_found)
+   :
+       ListView.separated(
+         padding: EdgeInsets.symmetric(horizontal: 12),
+         shrinkWrap: true,
+         scrollDirection: Axis.vertical,
         itemCount: results!.length,
         itemBuilder: (context, index) {
-          return Container(
-            child: ListTile(
+          return  ListTile(
               //i want to display different items for each list in the leading property.
                 leading: Image.network(
-                    getIconPath(results![index]['shop']), width: 20,
-                    height: 20),
-                title: Text(results![index]['name']),
+                    getIconPath('lenta'), width: 56,
+                    height: 56),
+                title: Text(results![index]['name']!, style: styleHeadList),
+                trailing: Text((results![index]['price'] ?? "0") + " RUB", style: styleHeadList),
                 onTap: () =>
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) =>
-                          ProductCard(
-                              properties: results![index]['properties'])),
+                          SearchPage.fromMap(
+                              map: results![index])),
                     )
-            ),
           );
         },
         separatorBuilder: (context, index) {
           return const Divider();
         },
-      );
+      ));
     }
   }
-}

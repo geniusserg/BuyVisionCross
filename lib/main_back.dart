@@ -25,3 +25,17 @@ Future<void> main() async {
   print(await TranslationService.execute(
       request: YandexCloudTranslateRequest(text: text)));
 }
+
+// Home
+// SearchList(results: [{"name": "ok", "image": "image", "price": "54", "Условия Хранения": "0"}],)
+
+/*
+
+// search list
+SearchList(results: [
+        {"name": "okgsdfghiolkdgsfghjkl;kdfghjkl;jsf", "image": "image", "price": "54", "Условия Хранения": "0"},
+    {"name": "okgsdfghiolkdgsfghjkl;kdfghjkl;jsf", "image": "image", "price": "54", "Условия Хранения": "0"}
+  ],)
+
+
+ */
