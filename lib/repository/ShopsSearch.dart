@@ -7,9 +7,9 @@ import 'Spar.dart';
 
 class ShopSearch{
   static Map<String, Shop> shopParsers = {
-    "auchan.ru": Auchan(),
+    "www.auchan.ru": Auchan(),
     "lenta.com" : Lenta(),
-    "spar-online.ru"  : Spar()
+    //"spar-online.ru"  : Spar()
   };
 
   static Future<Map<String, String?>?> parse(String url){

@@ -23,5 +23,5 @@ Future<void> main() async {
   */
   String text = "Hello world!";
   print(await TranslationService.execute(
-      request: YandexCloudTranslateRequest(text: [text])));
+      request: YandexCloudTranslateRequest(text: text)));
 }

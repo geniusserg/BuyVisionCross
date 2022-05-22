@@ -55,7 +55,7 @@ class Spar implements Shop {
     }
 
 
-    var resultMap = {"shop": "lenta.com", "image": imageUrl, "description": description, "price": price};
+    var resultMap = {"shop": "spar-online.com", "image": imageUrl, "description": description, "price": price};
 
     /*PROPERTIES*/
     var it = document.getElementsByClassName("sku-card-tab-params__item");//[0].getElementsByClassName("sku-card-tab-params__item");

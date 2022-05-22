@@ -16,20 +16,6 @@ class RecognitionService {
   static String reqUrl =
       "https://vision.api.cloud.yandex.net/vision/v1/batchAnalyze";
 
-  static Future<String?> executeAll(
-      {required YandexCloudVisionRequest request}) async {
-    String? recognizedText = await RecognitionService.execute(request: request);
-    if (recognizedText != null) {
-      List<String> targetText = recognizedText.split(".");
-      String? translatedText = await TranslationService.execute(
-          request: YandexCloudTranslateRequest(text: targetText));
-      if (translatedText != null) {
-        return translatedText;
-      }
-    }
-    return recognizedText;
-  }
-
   static Future<String?> execute(
       {required YandexCloudVisionRequest request}) async {
     if (!hasInternet()) {

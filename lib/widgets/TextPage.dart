@@ -11,6 +11,8 @@ import '../services/TranslationService.dart';
 class TextPage extends StatefulWidget {
   String path;
   late Future<String?> textActionFuture;
+  String action = "recognize";
+  String? text;
   TextPage({Key? key, required this.path}) : super(key: key) {
     textActionFuture = RecognitionService.execute(
         request: YandexCloudVisionRequest(path: path));
@@ -20,7 +22,6 @@ class TextPage extends StatefulWidget {
 }
 
 class TextPageState extends State<TextPage> {
-  String? text;
   String state = "stop";
   FlutterTts? tts;
   void speechButton(BuildContext context) {
@@ -36,7 +37,7 @@ class TextPageState extends State<TextPage> {
       state = "stop";
     };
     if (state == "stop") {
-      tts!.speak(text ?? str_loading);
+      tts!.speak(widget.text ?? str_loading);
       state = "play";
     } else {
       tts!.stop();
@@ -52,11 +53,12 @@ class TextPageState extends State<TextPage> {
   }
 
   void translateButton(BuildContext context) {
-    if (text == null) {
+    if (widget.text == null) {
       return;
     }
+    widget.action = "translate";
     widget.textActionFuture = TranslationService.execute(
-        request: YandexCloudTranslateRequest(text: [text!]));
+        request: YandexCloudTranslateRequest(text: widget.text!));
     setState(() {});
   }
 
@@ -103,7 +105,6 @@ class TextPageState extends State<TextPage> {
                             Text(str_speech_label, style: styleAppBarText)
                           ])),
                   TextButton(
-                      //onPressed: () {},
                       onPressed: () {
                         translateButton(context);
                       },
@@ -127,9 +128,14 @@ class TextPageState extends State<TextPage> {
             future: widget.textActionFuture,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
-                text = (snapshot.data as String?) ?? str_not_found;
+                if (widget.action == "translate") {
+                  widget.text = (snapshot.data as String?) ?? widget.text;
+                }
+                else{
+                  widget.text = (snapshot.data as String?) ?? str_not_found;
+                }
                 return SingleChildScrollView(
-                  child: Text(text!, style: styleTextRecognized),
+                  child: Text(widget.text!, style: styleTextRecognized),
                 );
               }
               return loadingWidget();

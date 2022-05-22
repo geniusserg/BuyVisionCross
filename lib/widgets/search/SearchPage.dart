@@ -47,17 +47,6 @@ class _SearchPageStateFound extends State<SearchPage> {
             ])));
   }
 
-
-  Widget buildHeader(String? text) {
-    return  Container(
-            alignment: Alignment.center,
-            child: Container(
-                child: Padding(
-                    padding: EdgeInsets.all(12),
-      child: Text(text ?? str_not_found, style: styleTextRecognized),
-    )));
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
