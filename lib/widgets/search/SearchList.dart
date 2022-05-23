@@ -1,3 +1,4 @@
+import 'package:buy_vision_crossplatform/models/SearchViewDomain.dart';
 import 'package:buy_vision_crossplatform/resources/strings.dart';
 import 'package:buy_vision_crossplatform/widgets/search/ProductCard.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +8,8 @@ import 'ProductCard.dart';
 import 'SearchPage.dart';
 
 class SearchList  extends StatelessWidget {
-  SearchList ({Key? key, this.results}) : super(key: key);
-  List<Map<String, String>>? results;
+  SearchList ({Key? key, required this.search}) : super(key: key);
+  SearchViewDomain search;
 
   String getIconPath(String shop){
     switch(shop){
@@ -29,33 +30,32 @@ class SearchList  extends StatelessWidget {
               backgroundColor: Color(0xFF94CCF9),
               title: Text(str_search_results, style: styleHeader)),
         body:
-      results == null ?
+        (search.results.isEmpty) ?
        const Text(str_not_found)
    :
        ListView.separated(
          padding: EdgeInsets.symmetric(horizontal: 12),
          shrinkWrap: true,
          scrollDirection: Axis.vertical,
-        itemCount: results!.length,
+        itemCount: search.results.length,
         itemBuilder: (context, index) {
           return  ListTile(
               //i want to display different items for each list in the leading property.
                 leading: Image.network(
                     getIconPath('lenta'), width: 56,
                     height: 56),
-                title: Text(results![index]['name']!, style: styleHeadList),
-                trailing: Text((results![index]['price'] ?? "0") + " RUB", style: styleHeadList),
+                title: Text(search.results[index]['name']!, style: styleHeadList),
+                trailing: Text((search.results[index]['price'] ?? "0") + " RUB", style: styleHeadList),
                 onTap: () =>
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) =>
-                          SearchPage.fromMap(
-                              map: results![index])),
+                          SearchPage(controller: search, index: index,)),
                     )
           );
         },
         separatorBuilder: (context, index) {
-          return const Divider();
+          return const Divider(height: 8,);
         },
       ));
     }

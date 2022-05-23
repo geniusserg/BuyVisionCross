@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:buy_vision_crossplatform/di/dependencies.dart';
 import 'package:buy_vision_crossplatform/widgets/TextPage.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import '../resources/strings.dart';
 
 class CameraScreen extends StatefulWidget {
   const CameraScreen({Key? key}) : super(key: key);
@@ -90,6 +87,11 @@ class _CameraScreenState extends State<CameraScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () { Navigator.of(context).pop(); },
+        child: Icon(Icons.navigate_before_outlined),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       body: _controller.value.isInitialized
           ? Stack(
               children: <Widget>[

@@ -5,7 +5,7 @@ import 'Lenta.dart';
 import 'Shop.dart';
 import 'Spar.dart';
 
-class ShopSearch{
+class ShopParser{
   static Map<String, Shop> shopParsers = {
     "www.auchan.ru": Auchan(),
     "lenta.com" : Lenta(),
@@ -31,18 +31,5 @@ class ShopSearch{
     return parsedSite;
   }
 
-  static Future<List<Map<String, String?>>?> getInfo(String searchString) async{
-    List<String> urls = await GoogleSearch.execute(searchString);
-    if (urls.isEmpty){
-      return null;
-    }
-    List<Map<String, String?>> result = [];
-    for (String url in urls){
-      var t = await ShopSearch.parse(url);
-      if (t != null){
-        result.add(t);
-      }
-    }
-    return result;
-  }
+
 }

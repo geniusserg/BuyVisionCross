@@ -14,6 +14,11 @@ class BarcodeScanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: QrCamera(
+        child:       FloatingActionButton(
+          onPressed: () { Navigator.of(context).pop(); },
+      child: Icon(Icons.navigate_before_outlined),
+    ),
+    //floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
         qrCodeCallback: (code) {
           if (code == null) {
             throw Exception("Barcode was not found");

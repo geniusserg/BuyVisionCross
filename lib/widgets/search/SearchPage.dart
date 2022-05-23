@@ -1,5 +1,5 @@
+import 'package:buy_vision_crossplatform/models/SearchViewDomain.dart';
 import 'package:buy_vision_crossplatform/repository/BarcodeList.dart';
-import 'package:buy_vision_crossplatform/repository/BaseSearch.dart';
 import 'package:buy_vision_crossplatform/repository/GS1Repository.dart';
 import 'package:buy_vision_crossplatform/repository/ShopsSearch.dart';
 import 'package:buy_vision_crossplatform/services/SpeechService.dart';
@@ -16,37 +16,21 @@ import '../Home.dart';
 import 'ProductCard.dart';
 
 class SearchPage extends StatefulWidget {
-  late Future<Map<String, String?>?> productInfo;
+  late SearchViewDomain searchViewDomain;
   late SpeechService speechService;
-  Map<String, String>? productInfoValue;
-  String code = "";
+  int index = 0;
 
-  SearchPage({Key? key, required this.code}) : super(key: key) {
+  SearchPage({Key? key, String? code, SearchViewDomain? controller, int? index}) : super(key: key) {
+    if (code != null) {
+      searchViewDomain = SearchViewDomain(code: code); // just from camera
+    }
+    else {
+      searchViewDomain = controller!; // when it is push from list
+      if (index != null) {
+        this.index = index;  // page from search list
+      }
+    }
     speechService = SpeechService();
-    productInfo = BaseSearch.getInfo(code).then((val) {
-      productInfoValue = {};
-      val.forEach((key, value) {
-        value ??= str_not_found;
-        productInfoValue?.addEntries([MapEntry(key, value)]);
-      });
-    });
-  }
-
-  SearchPage.fromUrl({Key? key, String? url}) : super(key: key) {
-    productInfo = ShopSearch.parse(url!).then((val) {
-      productInfoValue = {};
-      val?.forEach((key, value) {
-        value ??= str_not_found;
-        productInfoValue?.addEntries([MapEntry(key, value)]);
-      });
-    });
-  }
-
-  SearchPage.fromMap({Key? key, required Map<String, String> map})
-      : super(key: key) {
-    productInfo = Future(() => map).then((val) {
-      productInfoValue = map;
-    });
   }
 
   @override
@@ -56,7 +40,7 @@ class SearchPage extends StatefulWidget {
 class _SearchPageStateFound extends State<SearchPage> {
   void speechButton(BuildContext context) {
     widget.speechService
-        .speak(context, widget.productInfoValue.toString(), str_shop_not_found);
+        .speak(context, widget.searchViewDomain.currentResult.toString(), str_shop_not_found);
   }
 
   void backButton(BuildContext context) {
@@ -65,14 +49,11 @@ class _SearchPageStateFound extends State<SearchPage> {
   }
 
   void moreOptions(BuildContext context) {
-    if (widget.productInfoValue == null) {
-      return;
-    }
-    if (widget.productInfoValue!['shop'] == "gs1.ru") {
+    if (widget.searchViewDomain.searchUrls == null) {
       return;
     }
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => SearchList()));
+        context, MaterialPageRoute(builder: (context) => SearchList(search: widget.searchViewDomain,)));
   }
 
   Widget bottomBar(BuildContext context) {
@@ -124,14 +105,13 @@ class _SearchPageStateFound extends State<SearchPage> {
             backgroundColor: Color(0xFF94CCF9),
             title: Text(str_search_results, style: styleHeader)),
         body: FutureBuilder(
-            future: widget.productInfo,
+            future: widget.searchViewDomain.getScreenDetailsData(index: widget.index),
             builder: (c, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
-                if (widget.productInfoValue == null ||
-                    widget.productInfoValue!.isEmpty) {
+                if (widget.searchViewDomain.currentResult == {}) {
                   return Text(str_not_found, style: styleTextRecognized);
                 }
-                return ProductCard(properties: widget.productInfoValue);
+                return ProductCard(properties: widget.searchViewDomain.currentResult!);
               }
               return loadingWidget();
             }),

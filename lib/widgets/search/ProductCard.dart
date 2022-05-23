@@ -5,7 +5,7 @@ import '../../resources/strings.dart';
 import 'ShowPhoto.dart';
 
 class ProductCard extends StatelessWidget {
-  Map<String, String>? properties; // properties from the first shop
+  Map<String, String?>? properties; // properties from the first shop
   ProductCard({Key? key, required this.properties}) : super(key: key);
 
   @override
@@ -72,14 +72,14 @@ class ProductCard extends StatelessWidget {
               ]);
             }
         }
-        MapEntry<String, String> prop = properties!.entries.elementAt(index);
+        MapEntry<String, String?> prop = properties!.entries.elementAt(index);
         return Column(
           children: [
             Text(prop.key, style: styleHeadList),
             Container(
               height: 10,
             ),
-            Text(prop.value, style: styleValueList),
+            Text(prop.value ?? "Not found", style: styleValueList),
             Divider()
           ],
         );
