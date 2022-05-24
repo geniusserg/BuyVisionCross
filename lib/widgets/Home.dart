@@ -38,9 +38,7 @@ class Home extends StatelessWidget {
           padding: EdgeInsets.all(12),
           child: ElevatedButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return const BarcodeScanner();
-              }));
+              BarcodeScanner().launchPreviewPage(context);
             },
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

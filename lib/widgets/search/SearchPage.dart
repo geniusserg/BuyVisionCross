@@ -108,7 +108,7 @@ class _SearchPageStateFound extends State<SearchPage> {
             future: widget.searchViewDomain.getScreenDetailsData(index: widget.index),
             builder: (c, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
-                if (widget.searchViewDomain.currentResult == {}) {
+                if (widget.searchViewDomain.currentResult!.isEmpty) {
                   return Text(str_not_found, style: styleTextRecognized);
                 }
                 return ProductCard(properties: widget.searchViewDomain.currentResult!);

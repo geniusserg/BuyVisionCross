@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:buy_vision_crossplatform/resources/strings.dart';
+import 'package:buy_vision_crossplatform/widgets/BarcodeScanner.dart';
 import 'package:buy_vision_crossplatform/widgets/ErrorConnection.dart';
 import 'package:buy_vision_crossplatform/widgets/TextPage.dart';
 import 'package:buy_vision_crossplatform/widgets/search/ProductCard.dart';
@@ -25,7 +26,11 @@ Future<void> main() async {
     return;
   }
 
-
+/*
+  runApp(MaterialApp(
+      theme: ThemeData(primaryColor: Colors.brown, secondaryHeaderColor: Colors.brown),
+      debugShowCheckedModeBanner: false, home: SafeArea(child: Home())));
+*/
   runApp(MaterialApp(
       theme: ThemeData(primaryColor: Colors.brown, secondaryHeaderColor: Colors.brown),
       debugShowCheckedModeBanner: false, home: SafeArea(child: Home())));

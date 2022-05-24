@@ -38,12 +38,13 @@ class SearchViewDomain{
   }
 
 
-  Future<Map<String, String?>> getScreenDetailsData({int? index}) async {
+  Future<Map<String, String?>?> getScreenDetailsData({int? index}) async {
     if (this.name == null)
     {
       this.name = await _getName(code);
       if (this.name == null) {
-        return {}; // Name was not found - empty map
+        currentResult = {}; // Name was not found - empty map
+        return currentResult;
       }
     }
 
@@ -54,6 +55,7 @@ class SearchViewDomain{
     // google does not search any info
     if (searchUrls == null || searchUrls!.isEmpty){
       currentResult = {"shop": null, "name": name, "price": null, "image": null };
+      return currentResult;
     }
 
     if (results.isEmpty) {
@@ -75,6 +77,7 @@ class SearchViewDomain{
     if (results.isEmpty) {
       currentResult =
       {"shop": null, "name": name, "price": null, "image": null};
+      return currentResult;
     }
 
     index ??= 0;

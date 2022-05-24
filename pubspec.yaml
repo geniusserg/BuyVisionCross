@@ -39,7 +39,8 @@ dependencies:
   http: ^0.13.4
   flutter_tts: ^3.3.3
   image_downloader: ^0.31.0
-  
+  barcode_scan2: any
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
