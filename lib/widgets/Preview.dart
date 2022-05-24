@@ -88,6 +88,7 @@ class _CameraScreenState extends State<CameraScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+        heroTag: "HEROTG",
         onPressed: () { Navigator.of(context).pop(); },
         child: Icon(Icons.navigate_before_outlined),
       ),
