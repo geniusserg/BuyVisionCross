@@ -44,7 +44,7 @@ class _CameraScreenState extends State<CameraScreen> {
 
     try {
       // Turning off the camera flash
-      _controller.setFlashMode(FlashMode.off);
+      _controller.setFlashMode(FlashMode.always);
       // Returns the image in cross-platform file abstraction
       final XFile file = await _controller.takePicture();
       // Retrieving the path

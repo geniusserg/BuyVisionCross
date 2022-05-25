@@ -33,11 +33,10 @@ class YandexService {
         },
         body: requestJson,
         encoding: Encoding.getByName("UTF-8"));
-    print(utf8.decode(response.bodyBytes));
     return utf8.decode(response.bodyBytes);
   }
 
   static void execute() {
-    // here body
+    // here body override!
   }
 }
