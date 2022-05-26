@@ -26,8 +26,8 @@ class Home extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                const Icon(Icons.zoom_in, size: 200, semanticLabel: "look up"),
-                const Text(str_help_read, style: styleMenu)
+                const Icon(Icons.zoom_in, size: 200, semanticLabel: str_help_read),
+                const Text(str_help_read, textAlign: TextAlign.center, style: styleMenu)
               ])),
         )),
         Expanded(
@@ -41,8 +41,8 @@ class Home extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
               const Icon(Icons.qr_code_scanner,
-                  size: 200, semanticLabel: "look up"),
-              const Text(str_help_search, style: styleMenu)
+                  size: 200, semanticLabel: str_help_search),
+              const Text(str_help_search, textAlign: TextAlign.center, style: styleMenu)
             ])))),
       ],
     ));

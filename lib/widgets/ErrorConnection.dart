@@ -17,7 +17,7 @@ class ErrorPage extends StatelessWidget {
               child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-          Icon(icon ?? Icons.error_outline, color: Colors.black, size: 128.0),
+          Icon(icon ?? Icons.error_outline, size: 128.0),
           Text(error, style: styleError, textAlign: TextAlign.center)
         ]))));
   }

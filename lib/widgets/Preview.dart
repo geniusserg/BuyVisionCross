@@ -110,7 +110,6 @@ class _CameraScreenState extends State<CameraScreen> {
               ],
             )
           : Container(
-              color: Colors.black,
               child: Center(
                 child: CircularProgressIndicator(),
               ),

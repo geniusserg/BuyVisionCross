@@ -28,6 +28,7 @@ class SearchList  extends StatelessWidget {
   Widget build(BuildContext context) {
     return
       Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
         floatingActionButton: FloatingActionButton(
         heroTag: "HEROTG",
         onPressed: () { Navigator.of(context).pop(); },

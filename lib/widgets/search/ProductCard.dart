@@ -33,7 +33,7 @@ class ProductCard extends StatelessWidget {
               Container(height: 10)
             ]);
           case 3:
-            if (properties!['shop'] == "gs1.ru") {
+            if (properties!['shop'] == null) {
               return Center(
                   child: Text(str_shop_not_found, style: styleWarning, textAlign: TextAlign.center));
             } else {
@@ -47,13 +47,13 @@ class ProductCard extends StatelessWidget {
                                   ShowPicturePage(path: image)));
                         },
                         child: Container(
+                          padding: EdgeInsets.all(12),
                           decoration: BoxDecoration(border: Border.all(width: 0.5)),
                           child:Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(
                                 Icons.image_outlined,
-                                color: Colors.black,
                                 size: 36,
                               ),
                               Container(
