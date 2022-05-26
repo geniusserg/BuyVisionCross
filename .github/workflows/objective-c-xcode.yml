@@ -16,6 +16,7 @@ jobs:
       with:
         flutter-version: '2.10.4'
         architecture: x64
+    - run: flutter clean
     - run: flutter pub get
     - run: echo 'String authToken = "AeeIXUMjbmR0A";' >> ./lib/tokens.dart
     - run: echo 'String folderId = "e0w_LoUGeoIXUMjbmR0A";' >> ./lib/tokens.dart
