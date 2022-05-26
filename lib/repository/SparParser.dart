@@ -15,11 +15,9 @@ class SparParser implements ShopParser {
     var document = parse(response.body);
 
     /* IMAGE */
-    var imageUrl = document
-        .getElementsByTagName("img")[0]
-        .attributes['src'];
-    imageUrl = imageUrl == null ? imageUrl : "https://auchan.com/" + imageUrl;
-
+    var imageUrl = document.getElementsByTagName("img").isNotEmpty ?
+     "https://spar-online.com" + document.getElementsByTagName("img")[3]
+        .attributes["data-src"]! : null;
 
     /* DESCRIPTION */
     String? description = document
@@ -31,7 +29,7 @@ class SparParser implements ShopParser {
         .getElementsByClassName("price_value").isNotEmpty ? document
         .getElementsByClassName("price_value")[0].innerHtml.trim() : null;
 
-    var resultMap = {"shop": "spar-online.com", "image": imageUrl, "description": description, "price": price};
+    var resultMap = {"shop": "Спар", "image": imageUrl, "description": description, "price": price};
 
     /*PROPERTIES*/
     var it = document.getElementsByClassName("properties__item");

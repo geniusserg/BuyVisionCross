@@ -1,3 +1,4 @@
+import 'package:buy_vision_crossplatform/models/TextRecognitionViewModel.dart';
 import 'package:buy_vision_crossplatform/resources/strings.dart';
 import 'package:buy_vision_crossplatform/services/RecognitionService.dart';
 import 'package:buy_vision_crossplatform/services/SpeechService.dart';
@@ -12,22 +13,23 @@ import '../services/TranslationService.dart';
 
 class TextPage extends StatefulWidget {
   String path;
-  late Future<String?> textActionFuture;
-  String action = "recognize";
-  String? text;
+  late Future<String?> actionFuture;
+  late TextRecognitionViewModel viewModel;
   late SpeechService speechService;
+
   TextPage({Key? key, required this.path}) : super(key: key) {
     speechService = SpeechService();
-    textActionFuture = YandexRecognitionService.execute(
-        request: YandexCloudVisionRequest(path: path));
+    viewModel = TextRecognitionViewModel(path: path);
+    actionFuture = viewModel.recognizeText();
   }
+
   @override
   State<StatefulWidget> createState() => TextPageState();
 }
 
 class TextPageState extends State<TextPage> {
   void speechButton(BuildContext context) {
-    widget.speechService.speak(context, widget.text, str_not_found);
+    widget.speechService.speak(context, widget.viewModel.text, str_not_found);
   }
 
   void backButton(BuildContext context) {
@@ -36,15 +38,11 @@ class TextPageState extends State<TextPage> {
   }
 
   void translateButton(BuildContext context) {
-    if (widget.text == null) {
-      return;
+    if (widget.viewModel.text != null) {
+      widget.actionFuture = widget.viewModel.translateText();
+      setState(() {});
     }
-    widget.action = "translate";
-    widget.textActionFuture = YandexTranslationService.execute(
-        request: YandexCloudTranslateRequest(text: widget.text!));
-    setState(() {});
   }
-
 
   Widget bottomBar(BuildContext context) {
     return BottomAppBar(
@@ -96,17 +94,12 @@ class TextPageState extends State<TextPage> {
             title: Text(str_ocr_header, style: styleHeader)),
         bottomNavigationBar: bottomBar(context),
         body: FutureBuilder(
-            future: widget.textActionFuture,
+            future: widget.actionFuture,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
-                if (widget.action == "translate") {
-                  widget.text = (snapshot.data as String?) ?? widget.text;
-                } else {
-                  widget.text = (snapshot.data as String?) ?? str_not_found;
-                }
                 return SingleChildScrollView(
                   padding: EdgeInsets.all(12),
-                  child: Text(widget.text!, style: styleTextRecognized),
+                  child: Text(widget.viewModel.text ?? str_not_found, style: styleTextRecognized),
                 );
               }
               return loadingWidget();

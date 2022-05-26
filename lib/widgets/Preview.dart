@@ -13,7 +13,6 @@ class CameraScreen extends StatefulWidget {
 class _CameraScreenState extends State<CameraScreen> {
   late final CameraController _controller;
 
-  // Initializes camera controller to preview on screen
   void _initializeCamera() {
     final CameraController cameraController = CameraController(
     cameraDescription!, // should be resolved in main!
@@ -29,25 +28,17 @@ class _CameraScreenState extends State<CameraScreen> {
     });
   }
 
-  // Takes picture with the selected device camera, and
-  // returns the image path
   Future<String?> _takePicture() async {
     if (!_controller.value.isInitialized) {
       return null;
     }
-
     String? imagePath;
-
     if (_controller.value.isTakingPicture) {
       return null;
     }
-
     try {
-      // Turning off the camera flash
       _controller.setFlashMode(FlashMode.always);
-      // Returns the image in cross-platform file abstraction
       final XFile file = await _controller.takePicture();
-      // Retrieving the path
       imagePath = file.path;
     } on CameraException catch (e) {
       return null;
@@ -88,7 +79,7 @@ class _CameraScreenState extends State<CameraScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        heroTag: "HEROTG",
+        heroTag: "HEROTAG",
         onPressed: () { Navigator.of(context).pop(); },
         child: Icon(Icons.navigate_before_outlined, size: 48),
       ),

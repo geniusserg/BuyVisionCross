@@ -1,8 +1,6 @@
-import 'package:buy_vision_crossplatform/repository/GoogleSearch.dart';
-
+import 'ShopParser.dart';
 import 'AuchanParser.dart';
 import 'LentaParser.dart';
-import 'ShopParser.dart';
 import 'SparParser.dart';
 
 class ShopSearcher{

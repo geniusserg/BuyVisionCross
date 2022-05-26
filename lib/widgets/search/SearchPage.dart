@@ -1,15 +1,8 @@
 import 'package:buy_vision_crossplatform/models/SearchPageViewModel.dart';
-import 'package:buy_vision_crossplatform/repository/BarcodeList.dart';
-import 'package:buy_vision_crossplatform/repository/GS1Repository.dart';
-import 'package:buy_vision_crossplatform/repository/ShopsSearcher.dart';
 import 'package:buy_vision_crossplatform/services/SpeechService.dart';
 import 'package:buy_vision_crossplatform/widgets/elements/CommonElements.dart';
 import 'package:buy_vision_crossplatform/widgets/search/SearchList.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_tts/flutter_tts.dart';
-import 'package:http/http.dart' as http;
-
 import '../../resources/strings.dart';
 import '../../styles/TextStyles.dart';
 import '../Home.dart';

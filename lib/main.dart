@@ -12,9 +12,7 @@ import '../di/dependencies.dart' as di;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  di.targetLanguage = "ru";
 
-  /*
   di.cameraDescription = await getCamera();
   if (di.cameraDescription == null) {
     runApp(MaterialApp(
@@ -26,7 +24,6 @@ Future<void> main() async {
             icon: Icons.warning)));
     return;
   }
-  */
 
   if(await hasInternet() == false){
     runApp(MaterialApp(
