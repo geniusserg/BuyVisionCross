@@ -1,12 +1,7 @@
 import 'dart:async';
+import 'package:buy_vision_crossplatform/models/SearchViewDomain.dart';
 import 'package:buy_vision_crossplatform/resources/strings.dart';
-import 'package:buy_vision_crossplatform/widgets/BarcodeScanner.dart';
 import 'package:buy_vision_crossplatform/widgets/ErrorConnection.dart';
-import 'package:buy_vision_crossplatform/widgets/TextPage.dart';
-import 'package:buy_vision_crossplatform/widgets/search/ProductCard.dart';
-import 'package:buy_vision_crossplatform/widgets/search/SearchList.dart';
-import 'package:buy_vision_crossplatform/widgets/search/SearchPage.dart';
-import 'package:buy_vision_crossplatform/widgets/search/ShowPhoto.dart';
 import 'di/getCamera.dart';
 import 'package:buy_vision_crossplatform/widgets/Home.dart';
 import 'package:flutter/material.dart';
@@ -26,13 +21,14 @@ Future<void> main() async {
     return;
   }
 
-/*
+  //SearchViewDomain s = SearchViewDomain(code: "123456789");
+  //s.currentResult = {};
+
   runApp(MaterialApp(
-      theme: ThemeData(primaryColor: Colors.brown, secondaryHeaderColor: Colors.brown),
+    color: Colors.black54,
+      theme: ThemeData(colorScheme: ColorScheme.highContrastLight()),
       debugShowCheckedModeBanner: false, home: SafeArea(child: Home())));
-*/
-  runApp(MaterialApp(
-      theme: ThemeData(primaryColor: Colors.brown, secondaryHeaderColor: Colors.brown),
-      debugShowCheckedModeBanner: false, home: SafeArea(child: Home())));
+
+
 
 }

@@ -57,7 +57,7 @@ class Lenta implements Shop{
     }
 
 
-    var resultMap = {"name": description, "image": imageUrl, "price": price};
+    var resultMap = {"shop": "Лента", "name": description, "image": imageUrl, "price": price};
 
     /*PROPERTIES*/
     var it = document.getElementsByClassName("sku-card-tab-params__item");//[0].getElementsByClassName("sku-card-tab-params__item");

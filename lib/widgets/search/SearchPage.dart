@@ -102,7 +102,7 @@ class _SearchPageStateFound extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            backgroundColor: Color(0xFF94CCF9),
+            leading: Container(),
             title: Text(str_search_results, style: styleHeader)),
         body: FutureBuilder(
             future: widget.searchViewDomain.getScreenDetailsData(index: widget.index),
@@ -115,6 +115,7 @@ class _SearchPageStateFound extends State<SearchPage> {
               }
               return loadingWidget();
             }),
-        bottomNavigationBar: bottomBar(context));
+        bottomNavigationBar: bottomBar(context),
+    );
   }
 }

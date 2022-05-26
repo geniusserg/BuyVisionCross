@@ -92,7 +92,7 @@ class TextPageState extends State<TextPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            backgroundColor: Color(0xFF94CCF9),
+            leading: Container(),
             title: Text(str_ocr_header, style: styleHeader)),
         bottomNavigationBar: bottomBar(context),
         body: FutureBuilder(

@@ -90,7 +90,7 @@ class _CameraScreenState extends State<CameraScreen> {
       floatingActionButton: FloatingActionButton(
         heroTag: "HEROTG",
         onPressed: () { Navigator.of(context).pop(); },
-        child: Icon(Icons.navigate_before_outlined),
+        child: Icon(Icons.navigate_before_outlined, size: 48),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       body: _controller.value.isInitialized
@@ -102,7 +102,7 @@ class _CameraScreenState extends State<CameraScreen> {
                   child: Container(
                     alignment: Alignment.bottomCenter,
                     child: FloatingActionButton.large(
-                      child: Icon(Icons.photo_camera),
+                      child: Icon(Icons.photo_camera, size: 42),
                       onPressed: handleTakingPicture
                     ),
                   ),

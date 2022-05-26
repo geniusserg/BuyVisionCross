@@ -10,17 +10,14 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Column(
+    return Scaffold( body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Expanded(
             child: Padding(
           padding: EdgeInsets.all(12),
         
-          child: ElevatedButton(
-            
-              style: ButtonStyle(),
+          child: OutlinedButton(
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return const CameraScreen();
@@ -36,7 +33,7 @@ class Home extends StatelessWidget {
         Expanded(
             child: Padding(
           padding: EdgeInsets.all(12),
-          child: ElevatedButton(
+          child: OutlinedButton(
             onPressed: () {
               BarcodeScanner().launchPreviewPage(context);
             },
