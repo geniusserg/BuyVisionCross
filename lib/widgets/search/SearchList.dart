@@ -1,4 +1,4 @@
-import 'package:buy_vision_crossplatform/models/SearchViewDomain.dart';
+import 'package:buy_vision_crossplatform/models/SearchPageViewModel.dart';
 import 'package:buy_vision_crossplatform/resources/strings.dart';
 import 'package:buy_vision_crossplatform/widgets/search/ProductCard.dart';
 import 'package:flutter/material.dart';

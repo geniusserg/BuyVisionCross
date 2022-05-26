@@ -1,6 +1,11 @@
+import 'dart:io';
+
+import 'package:buy_vision_crossplatform/di/checkInternetConnection.dart';
 import 'package:buy_vision_crossplatform/resources/strings.dart';
 import 'package:buy_vision_crossplatform/styles/TextStyles.dart';
 import 'package:flutter/material.dart';
+
+import 'Home.dart';
 
 class ErrorPage extends StatelessWidget {
   IconData? icon;
@@ -13,12 +18,20 @@ class ErrorPage extends StatelessWidget {
         body: SafeArea(
             child: Container(
               alignment: Alignment.center,
-              height: 200,
               child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-          Icon(icon ?? Icons.error_outline, size: 128.0),
-          Text(error, style: styleError, textAlign: TextAlign.center)
+                Icon(icon ?? Icons.error_outline, size: 128.0),
+                Text(error, style: styleError, textAlign: TextAlign.center),
+                Container(height: 28,),
+                TextButton(onPressed: () async {
+                  if (this.icon == Icons.wifi_off) {
+                    if(await hasInternet() == true){
+                      Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => Home()));
+                    }
+                  }
+                 }, child: Text(str_retry, style: styleMenu))
         ]))));
   }
 }

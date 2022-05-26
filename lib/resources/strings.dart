@@ -26,6 +26,10 @@ const String str_more_button = "ВАРИАНТЫ";
 const String str_options = "Характеристики";
 const String str_product_not_found = "Продукт не найден в базе";
 const String str_loading_icon = "Индикатор загрузки";
+const String str_internet_not_found = "Нет подключения к интернету";
+const String str_warning_item_not_found = "По данному штрих-коду продукт не найден";
+const String str_add_info_not_found = "Продукт не найден в магазинах";
+const String str_retry = "Проверить еще раз";
 // Shops
 const String str_auchan = "Ашан";
 const String str_barcode_list = "База данных штрихкодов";

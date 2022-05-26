@@ -2,6 +2,8 @@ import 'package:buy_vision_crossplatform/repository/BarcodeList.dart';
 import 'package:buy_vision_crossplatform/repository/GoogleSearch.dart';
 import 'package:buy_vision_crossplatform/repository/ShopsSearch.dart';
 
+import '../resources/strings.dart';
+
 class SearchViewDomain{
   Map<String, String?>? currentResult;
   List<Map<String, String?>> results = [];
@@ -37,52 +39,54 @@ class SearchViewDomain{
     return result;
   }
 
-
+  // First screen data perpare and fill parameters
   Future<Map<String, String?>?> getScreenDetailsData({int? index}) async {
     if (this.name == null)
     {
       this.name = await _getName(code);
       if (this.name == null) {
         currentResult = {}; // Name was not found - empty map
-        return currentResult;
       }
     }
+    else {
+      if (searchUrls == null || searchUrls!.isEmpty) {
+        this.searchUrls = await _getSearchResults(name!);
+      }
 
-    if (searchUrls == null || searchUrls!.isEmpty) {
-      this.searchUrls = await _getSearchResults(name!);
-    }
-
-    // google does not search any info
-    if (searchUrls == null || searchUrls!.isEmpty){
-      currentResult = {"shop": null, "name": name, "price": null, "image": null };
-      return currentResult;
-    }
-
-    if (results.isEmpty) {
-      for (String url in searchUrls!) {
-        Map<String, String?>? t;
-        try {
-          t = await ShopParser.parse(url);
+      // google does not search any info
+      if (searchUrls == null || searchUrls!.isEmpty) {
+        currentResult =
+        {"shop": null, "name": name, "price": null, "image": null};
+      }
+      else {
+        if (results.isEmpty) {
+          for (String url in searchUrls!) {
+            Map<String, String?>? t;
+            try {
+              t = await ShopParser.parse(url);
+            }
+            on Error {
+              continue;
+            }
+            if (t != null && t != {}) {
+              results.add(t);
+            }
+          }
         }
-        on Error{
-          continue;
+
+        // if we can not search info, just place name of product
+        if (results.isEmpty) {
+          currentResult =
+          {"shop": null, "name": name, "price": null, "image": null};
         }
-        if (t != null && t != {}) {
-          results.add(t);
+        else {
+          index ??= 0;
+          currentResult = results[index]; // all OK
         }
       }
     }
-
-    // if we can not search info, just place name of product
-    if (results.isEmpty) {
-      currentResult =
-      {"shop": null, "name": name, "price": null, "image": null};
-      return currentResult;
-    }
-
-    index ??= 0;
-    currentResult = results[index];
     return currentResult!;
   }
+
 
 }

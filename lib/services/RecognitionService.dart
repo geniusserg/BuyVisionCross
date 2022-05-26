@@ -18,7 +18,7 @@ class RecognitionService {
 
   static Future<String?> execute(
       {required YandexCloudVisionRequest request}) async {
-    if (!hasInternet()) {
+    if (await hasInternet() == false) {
       throw Exception("No internet connection");
     }
     var jsn = await request.getJson();

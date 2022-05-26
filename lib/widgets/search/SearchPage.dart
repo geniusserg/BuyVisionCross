@@ -1,4 +1,4 @@
-import 'package:buy_vision_crossplatform/models/SearchViewDomain.dart';
+import 'package:buy_vision_crossplatform/models/SearchPageViewModel.dart';
 import 'package:buy_vision_crossplatform/repository/BarcodeList.dart';
 import 'package:buy_vision_crossplatform/repository/GS1Repository.dart';
 import 'package:buy_vision_crossplatform/repository/ShopsSearch.dart';

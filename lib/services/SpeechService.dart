@@ -27,6 +27,10 @@ class SpeechService {
     }
   }
 
+  void speakMap({required BuildContext context, Map<String, String?>? structure, String? errText}) {
+    speak(context, getSpeechVersionOfItem(structure), errText);
+  }
+
   void stop() {
     if (tts != null) {
       tts?.stop();
@@ -34,5 +38,24 @@ class SpeechService {
     state = "stop";
   }
 
-  String? mapToString(Map<String, String> map) {}
+  // For widgets with characteristics
+  String getSpeechVersionOfItem(Map<String, String?>? currentResult){
+    Map<String, String> speechVersion = {};
+    if (currentResult == null){
+      speechVersion = {"Результат": str_warning_item_not_found};
+    }
+    if (currentResult!.isEmpty){
+      speechVersion = {"Результат": str_warning_item_not_found};
+    }
+    if (currentResult['shop'] == null){
+      if (currentResult['name'] == null){
+        speechVersion = {"Результат": str_warning_item_not_found};
+      }
+      speechVersion =  {currentResult['name']! : "", str_add_info_not_found: ""};
+    }
+    speechVersion['Информация магазина'] = currentResult['shop']!;
+    speechVersion['Название товара'] = currentResult['name']!;
+    speechVersion['Цена'] = currentResult['price'] == null ? "не найдена" : (currentResult['price']! + "RUB");
+    return speechVersion.toString();
+  }
 }
