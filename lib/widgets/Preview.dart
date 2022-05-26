@@ -60,7 +60,7 @@ class _CameraScreenState extends State<CameraScreen> {
     await _takePicture().then((String? path) {
         //_controller.dispose(); // maybe issue here?
         if (path != null) {
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) => TextPage(path: path),

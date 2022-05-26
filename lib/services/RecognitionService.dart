@@ -5,14 +5,14 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'package:buy_vision_crossplatform/models/YandexCloudTranslateRequest.dart';
-import 'package:buy_vision_crossplatform/services/Service.dart';
+import 'package:buy_vision_crossplatform/services/YandexService.dart';
 import 'package:buy_vision_crossplatform/services/TranslationService.dart';
 import '../di/checkInternetConnection.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/YandexCloudVisionRequest.dart';
 
-class RecognitionService {
+class YandexRecognitionService {
   static String reqUrl =
       "https://vision.api.cloud.yandex.net/vision/v1/batchAnalyze";
 

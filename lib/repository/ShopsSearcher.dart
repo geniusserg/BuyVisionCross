@@ -1,15 +1,15 @@
 import 'package:buy_vision_crossplatform/repository/GoogleSearch.dart';
 
-import 'Auchan.dart';
-import 'Lenta.dart';
-import 'Shop.dart';
+import 'AuchanParser.dart';
+import 'LentaParser.dart';
+import 'ShopParser.dart';
 import 'Spar.dart';
 
-class ShopParser{
-  static Map<String, Shop> shopParsers = {
-    "www.auchan.ru": Auchan(),
+class ShopSearcher{
+  static Map<String, ShopParser> shopParsers = {
+    "www.auchan.ru": AuchanParser(),
     "lenta.com" : Lenta(),
-    //"spar-online.ru"  : Spar()
+    "spar-online.ru"  : Spar()
   };
 
   static Future<Map<String, String?>?> parse(String url) async{

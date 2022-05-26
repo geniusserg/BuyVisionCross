@@ -1,7 +1,7 @@
 import 'package:buy_vision_crossplatform/models/SearchPageViewModel.dart';
 import 'package:buy_vision_crossplatform/repository/BarcodeList.dart';
 import 'package:buy_vision_crossplatform/repository/GS1Repository.dart';
-import 'package:buy_vision_crossplatform/repository/ShopsSearch.dart';
+import 'package:buy_vision_crossplatform/repository/ShopsSearcher.dart';
 import 'package:buy_vision_crossplatform/services/SpeechService.dart';
 import 'package:buy_vision_crossplatform/widgets/elements/CommonElements.dart';
 import 'package:buy_vision_crossplatform/widgets/search/SearchList.dart';
@@ -16,16 +16,16 @@ import '../Home.dart';
 import 'ProductCard.dart';
 
 class SearchPage extends StatefulWidget {
-  late SearchViewDomain searchViewDomain;
+  late SearchPageViewModel viewModel;
   late SpeechService speechService;
   int index = 0;
 
-  SearchPage({Key? key, String? code, SearchViewDomain? controller, int? index}) : super(key: key) {
+  SearchPage({Key? key, String? code, SearchPageViewModel? controller, int? index}) : super(key: key) {
     if (code != null) {
-      searchViewDomain = SearchViewDomain(code: code); // just from camera
+      viewModel = SearchPageViewModel(code: code); // just from camera
     }
     else {
-      searchViewDomain = controller!; // when it is push from list
+      viewModel = controller!; // when it is push from list
       if (index != null) {
         this.index = index;  // page from search list
       }
@@ -40,7 +40,7 @@ class SearchPage extends StatefulWidget {
 class _SearchPageStateFound extends State<SearchPage> {
   void speechButton(BuildContext context) {
     widget.speechService
-        .speak(context, widget.searchViewDomain.currentResult.toString(), str_shop_not_found);
+        .speak(context, widget.viewModel.currentResult.toString(), str_shop_not_found);
   }
 
   void backButton(BuildContext context) {
@@ -49,11 +49,14 @@ class _SearchPageStateFound extends State<SearchPage> {
   }
 
   void moreOptions(BuildContext context) {
-    if (widget.searchViewDomain.searchUrls == null) {
+    if (widget.viewModel.searchUrls == null) {
+      return;
+    }
+    if (widget.viewModel.searchUrls!.isEmpty) {
       return;
     }
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => SearchList(search: widget.searchViewDomain,)));
+        context, MaterialPageRoute(builder: (context) => SearchList(search: widget.viewModel,)));
   }
 
   Widget bottomBar(BuildContext context) {
@@ -105,13 +108,13 @@ class _SearchPageStateFound extends State<SearchPage> {
             leading: Container(),
             title: Text(str_search_results, style: styleHeader)),
         body: FutureBuilder(
-            future: widget.searchViewDomain.getScreenDetailsData(index: widget.index),
+            future: widget.viewModel.getScreenDetailsData(index: widget.index),
             builder: (c, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
-                if (widget.searchViewDomain.currentResult!.isEmpty) {
+                if (widget.viewModel.currentResult!.isEmpty) {
                   return Text(str_not_found, style: styleTextRecognized);
                 }
-                return ProductCard(properties: widget.searchViewDomain.currentResult!);
+                return ProductCard(properties: widget.viewModel.currentResult!);
               }
               return loadingWidget();
             }),

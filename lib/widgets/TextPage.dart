@@ -18,7 +18,7 @@ class TextPage extends StatefulWidget {
   late SpeechService speechService;
   TextPage({Key? key, required this.path}) : super(key: key) {
     speechService = SpeechService();
-    textActionFuture = RecognitionService.execute(
+    textActionFuture = YandexRecognitionService.execute(
         request: YandexCloudVisionRequest(path: path));
   }
   @override
@@ -40,7 +40,7 @@ class TextPageState extends State<TextPage> {
       return;
     }
     widget.action = "translate";
-    widget.textActionFuture = TranslationService.execute(
+    widget.textActionFuture = YandexTranslationService.execute(
         request: YandexCloudTranslateRequest(text: widget.text!));
     setState(() {});
   }

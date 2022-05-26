@@ -2,9 +2,9 @@
 import "package:http/http.dart" as http;
 import 'package:html/parser.dart';
 
-import 'Shop.dart';
+import 'ShopParser.dart';
 
-class Spar implements Shop {
+class Spar implements ShopParser {
   @override
   Future<Map<String, String?>> execute(String url) async {
     var response = await http.Client()

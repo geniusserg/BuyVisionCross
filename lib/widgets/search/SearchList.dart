@@ -9,7 +9,7 @@ import 'SearchPage.dart';
 
 class SearchList  extends StatelessWidget {
   SearchList ({Key? key, required this.search}) : super(key: key);
-  SearchViewDomain search;
+  SearchPageViewModel search;
 
   String getIconPath(String shop){
     switch(shop){
@@ -18,7 +18,7 @@ class SearchList  extends StatelessWidget {
       case "Лента":
         return "https://altekpro.ru/upload/iblock/4bf/4bfe11613d4cedb5d32ac8668756d7ff.png?resize=200x60";
       case "Ашан":
-        return "https://altekpro.ru/upload/iblock/4bf/4bfe11613d4cedb5d32ac8668756d7ff.png?resize=200x60";
+        return "https://i.siteapi.org/bvK3Lv-xaJ8DqzRT9hQtjPNeWqE=/fit-in/256x256/filters:fill(transparent):format(png)/s2.siteapi.org/d5d38a8c9499415/page/ga8c2d7hats84swcog4co4ww0wso4w";
         default:
         return "https://altekpro.ru/upload/iblock/4bf/4bfe11613d4cedb5d32ac8668756d7ff.png?resize=200x60";
     }

@@ -1,17 +1,17 @@
 import 'package:buy_vision_crossplatform/repository/BarcodeList.dart';
 import 'package:buy_vision_crossplatform/repository/GoogleSearch.dart';
-import 'package:buy_vision_crossplatform/repository/ShopsSearch.dart';
+import 'package:buy_vision_crossplatform/repository/ShopsSearcher.dart';
 
 import '../resources/strings.dart';
 
-class SearchViewDomain{
+class SearchPageViewModel{
   Map<String, String?>? currentResult;
   List<Map<String, String?>> results = [];
   List<String>? searchUrls;
   String? name;
   String code;
 
-  SearchViewDomain({required this.code});
+  SearchPageViewModel({required this.code});
 
   Future<String?> _getName(String code) async {
     return await BarcodeRepository.getInfo(code);
@@ -22,7 +22,7 @@ class SearchViewDomain{
   }
 
   Future<Map<String, String?>?> _getMapFromUrl(String url) async{
-    return await ShopParser.parse(url);
+    return await ShopSearcher.parse(url);
   }
 
   Future<List<Map<String, String?>>> getAllResults(String keyword) async {
@@ -31,7 +31,7 @@ class SearchViewDomain{
     }
     List<Map<String, String?>> result = [];
     for (String url in searchUrls!){
-      var t = await ShopParser.parse(url);
+      var t = await ShopSearcher.parse(url);
       if (t != null){
         result.add(t);
       }
@@ -63,7 +63,7 @@ class SearchViewDomain{
           for (String url in searchUrls!) {
             Map<String, String?>? t;
             try {
-              t = await ShopParser.parse(url);
+              t = await ShopSearcher.parse(url);
             }
             on Error {
               continue;

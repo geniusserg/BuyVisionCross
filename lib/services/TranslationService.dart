@@ -2,9 +2,9 @@
 // Need OAuth token
 
 import 'package:buy_vision_crossplatform/models/YandexCloudTranslateRequest.dart';
-import 'package:buy_vision_crossplatform/services/Service.dart';
+import 'package:buy_vision_crossplatform/services/YandexService.dart';
 
-class TranslationService {
+class YandexTranslationService {
   static String reqUrl =
       "https://translate.api.cloud.yandex.net/translate/v2/translate";
 
