@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../resources/strings.dart';
-import '../../styles/TextStyles.dart';
+import '../../resources/TextStyles.dart';
 
 Widget loadingWidget() {
   return Center(

@@ -4,7 +4,7 @@ import 'package:buy_vision_crossplatform/widgets/elements/CommonElements.dart';
 import 'package:buy_vision_crossplatform/widgets/search/SearchList.dart';
 import 'package:flutter/material.dart';
 import '../../resources/strings.dart';
-import '../../styles/TextStyles.dart';
+import '../../resources/TextStyles.dart';
 import '../Home.dart';
 import 'ProductCard.dart';
 
@@ -105,7 +105,15 @@ class _SearchPageStateFound extends State<SearchPage> {
             builder: (c, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (widget.viewModel.currentResult!.isEmpty) {
-                  return Text(str_not_found, style: styleTextRecognized);
+                  return
+                    Column(children:[
+                    Container(
+                    padding: EdgeInsets.all(20),
+                    alignment: Alignment.topCenter,
+                      child: Text(str_warning_item_not_found, style: styleTextRecognized, textAlign: TextAlign.center,)
+                    ),
+                    Container(height: 20),
+                    Icon(Icons.search_off_outlined, size: 128, color: Theme.of(context).primaryColor,)]);
                 }
                 return ProductCard(properties: widget.viewModel.currentResult!);
               }

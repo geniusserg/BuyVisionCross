@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:buy_vision_crossplatform/di/checkInternetConnection.dart';
 import 'package:buy_vision_crossplatform/resources/strings.dart';
-import 'package:buy_vision_crossplatform/styles/TextStyles.dart';
+import 'package:buy_vision_crossplatform/resources/TextStyles.dart';
 import 'package:flutter/material.dart';
 
 import 'Home.dart';

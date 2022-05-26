@@ -1,4 +1,4 @@
-import 'package:buy_vision_crossplatform/styles/TextStyles.dart';
+import 'package:buy_vision_crossplatform/resources/TextStyles.dart';
 import 'package:flutter/material.dart';
 
 import '../../resources/strings.dart';

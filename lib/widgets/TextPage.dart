@@ -1,15 +1,11 @@
 import 'package:buy_vision_crossplatform/models/TextRecognitionViewModel.dart';
 import 'package:buy_vision_crossplatform/resources/strings.dart';
-import 'package:buy_vision_crossplatform/services/RecognitionService.dart';
 import 'package:buy_vision_crossplatform/services/SpeechService.dart';
-import 'package:buy_vision_crossplatform/styles/TextStyles.dart';
+import 'package:buy_vision_crossplatform/resources/TextStyles.dart';
 import 'package:buy_vision_crossplatform/widgets/Home.dart';
 import 'package:buy_vision_crossplatform/widgets/elements/CommonElements.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_tts/flutter_tts.dart';
-import '../models/YandexCloudTranslateRequest.dart';
-import '../models/YandexCloudVisionRequest.dart';
-import '../services/TranslationService.dart';
+
 
 class TextPage extends StatefulWidget {
   String path;

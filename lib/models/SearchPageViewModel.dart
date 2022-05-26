@@ -41,14 +41,12 @@ class SearchPageViewModel{
 
   // First screen data perpare and fill parameters
   Future<Map<String, String?>?> getScreenDetailsData({int? index}) async {
-    if (this.name == null)
-    {
+    currentResult = {};
+    if (this.name == null) {
       this.name = await _getName(code);
-      if (this.name == null) {
-        currentResult = {}; // Name was not found - empty map
-      }
     }
-    else {
+
+    if (this.name != null) {
       if (searchUrls == null || searchUrls!.isEmpty) {
         this.searchUrls = await _getSearchResults(name!);
       }
@@ -84,6 +82,9 @@ class SearchPageViewModel{
           currentResult = results[index]; // all OK
         }
       }
+    }
+    else{
+      currentResult = {};
     }
     return currentResult!;
   }

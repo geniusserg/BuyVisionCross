@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:io';
-import 'package:buy_vision_crossplatform/models/SearchPageViewModel.dart';
 import 'package:buy_vision_crossplatform/resources/strings.dart';
 import 'package:buy_vision_crossplatform/widgets/ErrorConnection.dart';
 import 'package:flutter_tts/flutter_tts.dart';

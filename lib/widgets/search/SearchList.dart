@@ -3,7 +3,7 @@ import 'package:buy_vision_crossplatform/resources/strings.dart';
 import 'package:buy_vision_crossplatform/widgets/search/ProductCard.dart';
 import 'package:flutter/material.dart';
 
-import '../../styles/TextStyles.dart';
+import '../../resources/TextStyles.dart';
 import 'ProductCard.dart';
 import 'SearchPage.dart';
 

@@ -1,8 +1,7 @@
 import 'package:buy_vision_crossplatform/resources/strings.dart';
-import 'package:buy_vision_crossplatform/styles/TextStyles.dart';
+import 'package:buy_vision_crossplatform/resources/TextStyles.dart';
 import 'package:buy_vision_crossplatform/widgets/BarcodeScanner.dart';
 import 'package:buy_vision_crossplatform/widgets/Preview.dart';
-import 'package:buy_vision_crossplatform/widgets/search/SearchPage.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
