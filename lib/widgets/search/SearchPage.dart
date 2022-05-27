@@ -33,7 +33,7 @@ class SearchPage extends StatefulWidget {
 class _SearchPageStateFound extends State<SearchPage> {
   void speechButton(BuildContext context) {
     widget.speechService
-        .speak(context, widget.viewModel.currentResult.toString(), str_shop_not_found);
+        .speakMap(context, widget.viewModel.currentResult, str_shop_not_found);
   }
 
   void backButton(BuildContext context) {

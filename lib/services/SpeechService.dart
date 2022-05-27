@@ -27,7 +27,7 @@ class SpeechService {
     }
   }
 
-  void speakMap({required BuildContext context, Map<String, String?>? structure, String? errText}) {
+  void speakMap(BuildContext context, Map<String, String?>? structure, String? errText) {
     speak(context, getSpeechVersionOfItem(structure), errText);
   }
 
@@ -51,11 +51,18 @@ class SpeechService {
       if (currentResult['name'] == null){
         speechVersion = {"Результат": str_warning_item_not_found};
       }
-      speechVersion =  {currentResult['name']! : "", str_add_info_not_found: ""};
+      else {
+        speechVersion =
+        {currentResult['name']!: "", str_add_info_not_found: ""};
+      }
     }
-    speechVersion['Информация магазина'] = currentResult['shop']!;
-    speechVersion['Название товара'] = currentResult['name']!;
-    speechVersion['Цена'] = currentResult['price'] == null ? "не найдена" : (currentResult['price']! + "RUB");
+    else {
+      speechVersion['Информация магазина'] = currentResult['shop']!;
+      speechVersion['Название товара'] = currentResult['name']!;
+      speechVersion['Цена'] =
+      currentResult['price'] == null ? "не найдена" : (currentResult['price']! +
+          "RUB"); // tts talks correctly number when RUB in text
+    }
     return speechVersion.toString();
   }
 }
