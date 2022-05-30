@@ -5,12 +5,15 @@ import '../../resources/TextStyles.dart';
 
 Widget loadingWidget() {
   return Center(
-      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-    Container(
+      child:
+    Semantics(
+      label: str_loading_icon,
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Container(
       height: 30,
     ),
     CircularProgressIndicator(
-      semanticsLabel: str_loading_icon,
+      semanticsLabel: "",
     ),
     Container(
       height: 10,
@@ -19,5 +22,21 @@ Widget loadingWidget() {
       str_loading,
       style: styleTextRecognized,
     )
-  ]));
+  ])));
+}
+
+Widget notFound(BuildContext context) {
+  return
+    Column(children: [
+      Container(
+          padding: EdgeInsets.all(20),
+          alignment: Alignment.topCenter,
+          child: Text(str_warning_item_not_found, style: styleTextRecognized,
+            textAlign: TextAlign.center,)
+      ),
+      Container(height: 20),
+      Icon(Icons.search_off_outlined, size: 128, color: Theme
+          .of(context)
+          .primaryColor,)
+    ]);
 }

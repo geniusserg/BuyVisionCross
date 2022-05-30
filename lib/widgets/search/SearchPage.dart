@@ -105,15 +105,7 @@ class _SearchPageStateFound extends State<SearchPage> {
             builder: (c, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (widget.viewModel.currentResult!.isEmpty) {
-                  return
-                    Column(children:[
-                    Container(
-                    padding: EdgeInsets.all(20),
-                    alignment: Alignment.topCenter,
-                      child: Text(str_warning_item_not_found, style: styleTextRecognized, textAlign: TextAlign.center,)
-                    ),
-                    Container(height: 20),
-                    Icon(Icons.search_off_outlined, size: 128, color: Theme.of(context).primaryColor,)]);
+                  notFound(context);
                 }
                 return ProductCard(properties: widget.viewModel.currentResult!);
               }

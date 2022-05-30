@@ -1,8 +1,6 @@
 import 'package:buy_vision_crossplatform/models/YandexCloudTranslateRequest.dart';
 import 'package:buy_vision_crossplatform/models/YandexCloudVisionRequest.dart';
-import 'package:buy_vision_crossplatform/services/RecognitionService.dart';
-import 'package:camera/camera.dart';
-
+import '../services/RecognitionService.dart';
 import '../services/TranslationService.dart';
 
 class TextRecognitionViewModel {
@@ -27,5 +25,6 @@ class TextRecognitionViewModel {
         }
       });
     }
+    return text;
   }
 }

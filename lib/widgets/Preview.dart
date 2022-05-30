@@ -16,7 +16,7 @@ class _CameraScreenState extends State<CameraScreen> {
   void _initializeCamera() {
     final CameraController cameraController = CameraController(
     cameraDescription!, // should be resolved in main!
-      ResolutionPreset.high,
+      ResolutionPreset.max,
     );
     _controller = cameraController;
 
