@@ -25,13 +25,13 @@ Widget loadingWidget() {
   ])));
 }
 
-Widget notFound(BuildContext context) {
+Widget notFound(BuildContext context, String warning) {
   return
     Column(children: [
       Container(
           padding: EdgeInsets.all(20),
           alignment: Alignment.topCenter,
-          child: Text(str_warning_item_not_found, style: styleTextRecognized,
+          child: Text(warning, style: styleTextRecognized,
             textAlign: TextAlign.center,)
       ),
       Container(height: 20),

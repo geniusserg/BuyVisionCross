@@ -43,7 +43,7 @@ class SearchList  extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done){
               return (search.results.isEmpty) ?
-              notFound(context)
+              notFound(context, str_warning_item_not_found)
                   : ListView.separated(
                 padding: EdgeInsets.symmetric(horizontal: 12),
                 shrinkWrap: true,

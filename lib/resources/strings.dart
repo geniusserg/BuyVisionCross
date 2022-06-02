@@ -10,7 +10,7 @@ const String str_connection_error =
 const String str_take_photo = "сделать фото";
 const String str_loading = "ЗАГРУЗКА";
 const String str_search_results = "Результаты поиска";
-const String str_ocr_header = "Распознанный текст";
+const String str_ocr_header = "Найден текст";
 const String str_shop_not_found = "Данный товар не найден в магазинах";
 const String str_back = "Сделать новый снимок";
 const String str_back_page = "Вернуться назад";
@@ -31,6 +31,7 @@ const String str_internet_not_found = "Нет подключения к инте
 const String str_warning_item_not_found = "По данному штрих-коду продукт не найден";
 const String str_add_info_not_found = "Продукт не найден в магазинах";
 const String str_retry = "Проверить еще раз";
+const String str_text_not_found = "Текст не найден";
 // Shops
 const String str_auchan = "Ашан";
 const String str_barcode_list = "База данных штрихкодов";

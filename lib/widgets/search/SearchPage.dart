@@ -105,7 +105,7 @@ class _SearchPageStateFound extends State<SearchPage> {
             builder: (c, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (widget.viewModel.currentResult!.isEmpty) {
-                  notFound(context);
+                  notFound(context, str_warning_item_not_found);
                 }
                 return ProductCard(properties: widget.viewModel.currentResult!);
               }
