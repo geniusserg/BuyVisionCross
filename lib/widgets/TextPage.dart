@@ -95,7 +95,7 @@ class TextPageState extends State<TextPage> {
               if (snapshot.connectionState == ConnectionState.done) {
                 return SingleChildScrollView(
                   padding: EdgeInsets.all(12),
-                  child: (widget.viewModel.text == null) ?
+                  child: (widget.viewModel.text != null) ?
                       Text(widget.viewModel.text!, style: styleTextRecognized)
                       :
                       notFound(context, str_text_not_found)
