@@ -16,7 +16,11 @@ class SearchPageViewModel{
   }
 
   Future<List<String>?> _getSearchResults(String keyword) async {
-    return await GoogleSearch.execute(keyword);
+   var res = await GoogleSearch.execute(keyword);
+   if (res.length > 3){
+     res.removeRange(3, res.length);
+   }
+   return res;
   }
 
   Future<List<Map<String, String?>>> _getAllResults(String keyword) async {

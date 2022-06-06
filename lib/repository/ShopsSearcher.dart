@@ -1,3 +1,4 @@
+import './OzonParser.dart';
 import 'ShopParser.dart';
 import 'AuchanParser.dart';
 import 'LentaParser.dart';
@@ -5,8 +6,7 @@ import 'SparParser.dart';
 
 class ShopSearcher{
   static Map<String, ShopParser> shopParsers = {
-    "www.auchan.ru": AuchanParser(),
-    "lenta.com" : Lenta(),
+    "www.ozon.ru": OzonParser(),
     "spar-online.ru"  : SparParser()
   };
 

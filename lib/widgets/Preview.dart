@@ -16,7 +16,7 @@ class _CameraScreenState extends State<CameraScreen> {
   void _initializeCamera() {
     final CameraController cameraController = CameraController(
     cameraDescription!, // should be resolved in main!
-      ResolutionPreset.max,
+      ResolutionPreset.high,
     );
     _controller = cameraController;
 
@@ -37,7 +37,7 @@ class _CameraScreenState extends State<CameraScreen> {
       return null;
     }
     try {
-      _controller.setFlashMode(FlashMode.always);
+      _controller.setFlashMode(FlashMode.auto);
       final XFile file = await _controller.takePicture();
       imagePath = file.path;
     } on CameraException catch (e) {
