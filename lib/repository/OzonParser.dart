@@ -17,41 +17,41 @@ class OzonParser implements ShopParser {
 
     /* IMAGE */
     var imageUrl = document
-        .getElementsByClassName("uj8 ui-r8")
-        .isNotEmpty ? document.getElementsByClassName("uj8 ui-r8")[0]
+        .getElementsByTagName("img")
+        .isNotEmpty ? document.getElementsByTagName("img")[4]
         .attributes["src"]! : null;
 
     /* DESCRIPTION */
     String? description = document
-        .getElementsByClassName("l1y")
+        .getElementsByTagName("h1")
         .isNotEmpty ? document
-        .getElementsByClassName("l1y")[0].innerHtml.trim() : null;
+        .getElementsByTagName("h1")[0].innerHtml.trim() : null;
 
     /* PRICE */
     String? price = document
-        .getElementsByClassName("wl9 lx")
+        .getElementsByClassName("yl1 y1l")
         .isNotEmpty ? document
-        .getElementsByClassName("wl9 lx")[0]
+        .getElementsByClassName("yl1 y1l")[0]
         .getElementsByTagName("span")[0].innerHtml.trim() : null;
 
     var resultMap = {
-      "shop": "Лента",
+      "shop": "Ашан",
       "name": description,
       "image": imageUrl,
       "price": price
     };
 
     /*PROPERTIES*/
-    var it = document.getElementsByClassName("s1k");
+    var it = document.getElementsByTagName("dl");
     it.forEach((prop) {
-      String label = prop.getElementsByClassName("k1s")[0].innerHtml.trim();
+      String label = prop.getElementsByTagName("dt")[0].getElementsByTagName("span")[0].innerHtml.trim();
       if (label == "Артикул") {
         return;
       } // not needed info
       if (label == "ШтрихКод") {
         return;
       } // not needed info
-      var valElement = prop.getElementsByClassName("ks1")[0];
+      var valElement = prop.getElementsByTagName("dd")[0];
       String val = valElement.innerHtml.trim();
       if (valElement
           .getElementsByTagName("a")

@@ -6,7 +6,7 @@ import 'package:html/parser.dart';
 
 import 'ShopParser.dart';
 
-class Lenta implements ShopParser{
+class LentaParser implements ShopParser{
   @override
   Future<Map<String, String?>?> execute(String url) async {
     var response = await http.Client()

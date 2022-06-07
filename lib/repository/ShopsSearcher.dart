@@ -6,6 +6,7 @@ import 'SparParser.dart';
 
 class ShopSearcher{
   static Map<String, ShopParser> shopParsers = {
+    "lenta.com": LentaParser(),
     "www.ozon.ru": OzonParser(),
     "spar-online.ru"  : SparParser()
   };
