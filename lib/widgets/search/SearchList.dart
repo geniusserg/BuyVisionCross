@@ -56,7 +56,7 @@ class SearchList  extends StatelessWidget {
                       getIconPath(search.results[index]['shop']!), width: 56,
                     height: 56),
                 title: Text(search.results[index]['shop']!, style: styleHeadList),
-                trailing: Text((search.results[index]['price'] == null ? "не найдена" : (search.results[index]['price']! + " RUB")), style: styleHeadList),
+                trailing: Text((search.results[index]['price'] == null ? "не найдена" : (search.results[index]['price']!)), style: styleHeadList),
                 onTap: () =>
                     Navigator.push(
                       context,
