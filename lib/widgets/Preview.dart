@@ -37,7 +37,7 @@ class _CameraScreenState extends State<CameraScreen> {
       return null;
     }
     try {
-      _controller.setFlashMode(FlashMode.always);
+      _controller.setFlashMode(FlashMode.auto);
       final XFile file = await _controller.takePicture();
       imagePath = file.path;
     } on CameraException catch (e) {

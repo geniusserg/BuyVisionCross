@@ -6,7 +6,7 @@ import 'package:html/parser.dart';
 
 import 'ShopParser.dart';
 
-class Lenta implements ShopParser{
+class LentaParser implements ShopParser{
   @override
   Future<Map<String, String?>?> execute(String url) async {
     var response = await http.Client()
@@ -40,11 +40,11 @@ class Lenta implements ShopParser{
 
     /* PRICE */
     String? price ;
-    var priceElement = document.getElementsByClassName("price__primary");
-    if (priceElement.isEmpty) {
+    var priceElement = document.getElementsByClassName("price-label--primary");
+    if (priceElement.isNotEmpty) {
       priceElement = document.getElementsByClassName("price-label__integer");
       if (priceElement.isNotEmpty){
-        price = [priceElement[0].innerHtml.trim(), document.getElementsByClassName("price-label__fraction")[0].innerHtml.trim()].join(',');
+        price = [priceElement[0].innerHtml.trim(), document.getElementsByClassName("price-label__fraction")[0].innerHtml.trim()].join(',') + " ₽";
       }
       else{
         price = null;

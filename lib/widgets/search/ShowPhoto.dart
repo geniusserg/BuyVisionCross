@@ -39,6 +39,6 @@ class ShowPicturePage extends StatelessWidget {
     floatingActionButton: FloatingActionButton(onPressed: () {
       Navigator.of(context).pop();
     },
-    child: Icon(Icons.navigate_before)));
+    child: Icon(Icons.navigate_before, size:48)));
   }
 }

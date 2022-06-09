@@ -29,7 +29,7 @@ class SparParser implements ShopParser {
         .getElementsByClassName("price_value").isNotEmpty ? document
         .getElementsByClassName("price_value")[0].innerHtml.trim() : null;
 
-    var resultMap = {"shop": "Спар", "image": imageUrl, "description": description, "price": price};
+    var resultMap = {"shop": "Спар", "name": description, "image": imageUrl, "price": price};
 
     /*PROPERTIES*/
     var it = document.getElementsByClassName("properties__item");

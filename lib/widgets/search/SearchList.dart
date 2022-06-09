@@ -1,10 +1,11 @@
 import 'package:buy_vision_crossplatform/models/SearchPageViewModel.dart';
 import 'package:buy_vision_crossplatform/resources/strings.dart';
+import 'package:buy_vision_crossplatform/widgets/elements/CommonElements.dart';
 import 'package:buy_vision_crossplatform/widgets/search/ProductCard.dart';
 import 'package:flutter/material.dart';
 
 import '../../resources/TextStyles.dart';
-import 'ProductCard.dart';
+import '../elements/CommonElements.dart';
 import 'SearchPage.dart';
 
 class SearchList  extends StatelessWidget {
@@ -32,38 +33,46 @@ class SearchList  extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
         heroTag: "HEROTG",
         onPressed: () { Navigator.of(context).pop(); },
-    child: Icon(Icons.navigate_before_outlined, size: 48)),
+    child: Icon(Icons.navigate_before_outlined, size: 48, semanticLabel: str_back_page,)),
           appBar: AppBar(
             leading: Container(),
               title: Text(str_search_results, style: styleHeader)),
         body:
-        (search.results.isEmpty) ?
-       const Text(str_not_found)
-   :
-       ListView.separated(
-         padding: EdgeInsets.symmetric(horizontal: 12),
-         shrinkWrap: true,
-         scrollDirection: Axis.vertical,
-        itemCount: search.results.length,
-        itemBuilder: (context, index) {
-          return  ListTile(
+        FutureBuilder(
+          future: search.getListScreenData(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done){
+              return (search.results.isEmpty) ?
+              notFound(context, str_warning_item_not_found)
+                  : ListView.separated(
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                itemCount: search.results.length,
+                itemBuilder: (context, index) {
+                return  ListTile(
               //i want to display different items for each list in the leading property.
-                leading: Image.network(
-                    getIconPath(search.results[index]['shop']!), width: 56,
+                  leading: Image.network(
+                      getIconPath(search.results[index]['shop']!), width: 56,
                     height: 56),
                 title: Text(search.results[index]['shop']!, style: styleHeadList),
-                trailing: Text((search.results[index]['price'] ?? "-") + " RUB", style: styleHeadList),
+                trailing: Text((search.results[index]['price'] == null ? "не найдена" : (search.results[index]['price']!)), style: styleHeadList),
                 onTap: () =>
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) =>
                           SearchPage(controller: search, index: index,)),
                     )
-          );
-        },
-        separatorBuilder: (context, index) {
-          return const Divider(height: 8,);
-        },
-      ));
+              );
+            },
+              separatorBuilder: (context, index) {
+              return const Divider(height: 8,);
+              }
+            );
+            }
+            else{
+              return loadingWidget();
+            }
+            }));
     }
   }

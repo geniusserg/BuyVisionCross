@@ -2,8 +2,6 @@ import 'package:buy_vision_crossplatform/repository/BarcodeList.dart';
 import 'package:buy_vision_crossplatform/repository/GoogleSearch.dart';
 import 'package:buy_vision_crossplatform/repository/ShopsSearcher.dart';
 
-import '../resources/strings.dart';
-
 class SearchPageViewModel{
   Map<String, String?>? currentResult;
   List<Map<String, String?>> results = [];
@@ -18,14 +16,14 @@ class SearchPageViewModel{
   }
 
   Future<List<String>?> _getSearchResults(String keyword) async {
-    return await GoogleSearch.execute(keyword);
+   var res = await GoogleSearch.execute(keyword);
+   if (res.length > 3){
+     res.removeRange(3, res.length);
+   }
+   return res;
   }
 
-  Future<Map<String, String?>?> _getMapFromUrl(String url) async{
-    return await ShopSearcher.parse(url);
-  }
-
-  Future<List<Map<String, String?>>> getAllResults(String keyword) async {
+  Future<List<Map<String, String?>>> _getAllResults(String keyword) async {
     if (searchUrls!.isEmpty){
       return [];
     }
@@ -39,16 +37,35 @@ class SearchPageViewModel{
     return result;
   }
 
+  Future<Map<String, String?>?> _getFirstResult(String keyword) async {
+    if (searchUrls!.isEmpty){
+      return null;
+    }
+    for (String url in searchUrls!){
+      var t = await ShopSearcher.parse(url);
+      if (t != null){
+        return t;
+      }
+    }
+    return null;
+  }
+
+  Future<List<Map<String, String?>>> getListScreenData() async{
+    if (results.isEmpty) {
+      results = await _getAllResults(name!);
+    }
+    return results;
+  }
+
   // First screen data perpare and fill parameters
   Future<Map<String, String?>?> getScreenDetailsData({int? index}) async {
     currentResult = {};
-    if (this.name == null) {
-      this.name = await _getName(code);
-    }
+    name ??= await _getName(code);
+    index ??= 0;
 
-    if (this.name != null) {
+    if (name != null) {
       if (searchUrls == null || searchUrls!.isEmpty) {
-        this.searchUrls = await _getSearchResults(name!);
+        searchUrls = await _getSearchResults(name!);
       }
 
       // google does not search any info
@@ -57,30 +74,26 @@ class SearchPageViewModel{
         {"shop": null, "name": name, "price": null, "image": null};
       }
       else {
-        if (results.isEmpty) {
-          for (String url in searchUrls!) {
-            Map<String, String?>? t;
-            try {
-              t = await ShopSearcher.parse(url);
+          if (index == 0){
+            if (results.isNotEmpty){
+              currentResult = results[index];
             }
-            on Error {
-              continue;
-            }
-            if (t != null && t != {}) {
-              results.add(t);
+            // QUICKLY LOAD FIRST INFO!
+            else {
+              var firstResult = await _getFirstResult(
+                  name!); // to make loading fast parse just first
+              if (firstResult == null) {
+                currentResult =
+                {"shop": null, "name": name, "price": null, "image": null};
+              }
+              else {
+                currentResult = firstResult;
+              }
             }
           }
-        }
-
-        // if we can not search info, just place name of product
-        if (results.isEmpty) {
-          currentResult =
-          {"shop": null, "name": name, "price": null, "image": null};
-        }
-        else {
-          index ??= 0;
-          currentResult = results[index]; // all OK
-        }
+          else{
+            currentResult = results[index];
+          }
       }
     }
     else{
@@ -88,6 +101,5 @@ class SearchPageViewModel{
     }
     return currentResult!;
   }
-
 
 }

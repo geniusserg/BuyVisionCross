@@ -62,6 +62,12 @@ class SpeechService {
       speechVersion['Цена'] =
       currentResult['price'] == null ? "не найдена" : (currentResult['price']! +
           "RUB"); // tts talks correctly number when RUB in text
+      // other parameters
+      for (String key in currentResult.keys){
+        if (key != "shop" && key != "name" && key != "price" && key != "image"){
+          speechVersion[key] = currentResult[key] ?? str_not_found;
+        }
+      }
     }
     return speechVersion.toString();
   }
